@@ -17,14 +17,16 @@
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='8' y='8' width='16' height='16' rx='3' transform='rotate(45 16 16)' fill='%2398c1e5'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400..800;1,700..800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400..800;1,700..800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #1c1c1e;
-            --text-main: #f8f9fa;
-            --text-muted: #a0a0a5;
+            --bg-primary: #0c0c0d;
+            --bg-secondary: #151618;
+            --bg-surface: #1b1c1f;
+            --text-main: #f4f3ef;
+            --text-muted: #9ca0a6;
             --accent-primary: #98c1e5;
             --accent-primary-rgb: 152, 193, 229;
             --accent-primary-hover: #78a1c5;
@@ -32,23 +34,29 @@
             --accent-secondary-rgb: 149, 82, 81;
             /* Readable red for text (6.76:1 on #0a0a0a); keep --accent-secondary for fills */
             --accent-secondary-text: #c98583;
+            --accent-brass: #d4a853;
+
+            /* Font families */
+            --font-sans: 'Inter', system-ui, sans-serif;
+            --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
             /* Type scale */
             --fs-display: clamp(2.25rem, 1.2rem + 4.5vw, 4.5rem);
-            --fs-h2: clamp(1.75rem, 1.2rem + 2.4vw, 3rem);
-            --fs-h3: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+            --fs-h2: clamp(1.75rem, 1.2rem + 2.4vw, 2.85rem);
+            --fs-h3: clamp(1.2rem, 1.05rem + 0.5vw, 1.4rem);
             --fs-h3-lg: clamp(1.4rem, 1.1rem + 1.2vw, 2rem);
             --fs-lead: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem);
             --fs-eyebrow: 0.75rem;
 
             /* Spacing, radii, borders */
             --section-y: clamp(4rem, 2rem + 6vw, 7.5rem);
-            --radius-sm: 8px;
-            --radius-md: 14px;
-            --radius-lg: 24px;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 10px;
             --radius-pill: 999px;
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            --border-strong: rgba(255, 255, 255, 0.14);
+            --border-subtle: rgba(244, 243, 239, 0.12);
+            --border-strong: rgba(244, 243, 239, 0.24);
         }
 
         * {
@@ -101,10 +109,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.25rem 4rem;
-            background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            padding: 1.1rem 4rem;
+            background: rgba(12, 12, 13, 0.94);
             position: fixed;
             width: 100%;
             top: 0;
@@ -114,24 +120,36 @@
         }
 
         .logo {
-            font-weight: 800;
-            font-size: 1.5rem;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.45rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.65rem;
             color: var(--text-main);
             text-decoration: none;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
             z-index: 102;
         }
 
         .logo-icon {
             width: 24px;
             height: 24px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border-radius: 4px;
-            transform: rotate(45deg);
+            border: 1.5px solid var(--accent-primary);
+            background:
+                linear-gradient(90deg, transparent 30%, var(--accent-secondary) 30%, var(--accent-secondary) 38%, transparent 38%, transparent 64%, var(--accent-primary) 64%, var(--accent-primary) 72%, transparent 72%),
+                var(--bg-secondary);
+            border-radius: 2px;
+            position: relative;
             flex-shrink: 0;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            border: 1px solid rgba(244, 243, 239, 0.2);
+            pointer-events: none;
         }
 
         .nav-links {
@@ -141,10 +159,13 @@
         }
 
         .nav-links a {
+            font-family: var(--font-mono);
             text-decoration: none;
             color: var(--text-main);
-            font-weight: 600;
-            font-size: 0.95rem;
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
             transition: color 0.2s ease;
         }
 
@@ -161,9 +182,9 @@
             gap: 5px;
             width: 42px;
             height: 42px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
             cursor: pointer;
             padding: 0;
             z-index: 102;
@@ -181,7 +202,7 @@
             width: 20px;
             height: 2px;
             background: var(--text-main);
-            border-radius: 2px;
+            border-radius: 0;
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
@@ -205,6 +226,37 @@
             width: 100%;
         }
 
+        section:not(.hero) {
+            border-top: 1px solid var(--border-subtle);
+            position: relative;
+        }
+
+        section:not(.hero)::before {
+            content: '+';
+            position: absolute;
+            top: -0.65rem;
+            left: 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent-secondary-text);
+            background: var(--bg-primary);
+            padding: 0 0.35rem;
+            line-height: 1;
+        }
+
+        section:not(.hero)::after {
+            content: '+';
+            position: absolute;
+            top: -0.65rem;
+            right: 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent-secondary-text);
+            background: var(--bg-primary);
+            padding: 0 0.35rem;
+            line-height: 1;
+        }
+
         section[id] {
             scroll-margin-top: 80px;
         }
@@ -213,6 +265,7 @@
         h2,
         h3,
         h4 {
+            font-family: var(--font-display);
             line-height: 1.15;
             text-wrap: balance;
         }
@@ -239,6 +292,7 @@
         .card-title-lg {
             font-size: var(--fs-h3-lg);
             margin-bottom: 1rem;
+            letter-spacing: -0.02em;
         }
 
         h2 {
@@ -247,12 +301,10 @@
             width: fit-content;
             max-width: 100%;
             padding-bottom: 0.1em;
-            font-weight: 800;
-            margin-bottom: 2rem;
-            letter-spacing: -0.02em;
-            background: linear-gradient(90deg, var(--text-main), var(--text-muted));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+            color: var(--text-main);
         }
 
         /* Hero Section */
@@ -285,7 +337,7 @@
 
         .hero h1 {
             font-size: var(--fs-display);
-            font-weight: 800;
+            font-weight: 700;
             letter-spacing: -0.03em;
             margin-bottom: 1.5rem;
             color: var(--text-main);
@@ -316,15 +368,18 @@
             display: inline-flex;
             justify-content: center;
             align-items: center;
+            font-family: var(--font-mono);
             background-color: var(--accent-primary);
             color: var(--bg-primary);
-            padding: 0.95rem 2.25rem;
-            border-radius: 50px;
+            padding: 0.95rem 2rem;
+            border-radius: var(--radius-sm);
             text-decoration: none;
-            font-weight: 800;
-            font-size: 1.05rem;
-            transition: all 0.3s ease;
-            border: none;
+            font-weight: 700;
+            font-size: 0.92rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+            border: 1px solid transparent;
             cursor: pointer;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
@@ -332,63 +387,46 @@
 
         .cta-btn:hover {
             background-color: var(--accent-primary-hover);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
+            box-shadow: 3px 3px 0 var(--accent-secondary);
         }
 
         .cta-btn.secondary {
             background-color: transparent;
             color: var(--text-main);
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--border-strong);
         }
 
         .cta-btn.secondary:hover {
             border-color: var(--accent-secondary-text);
             color: var(--accent-secondary-text);
             background-color: rgba(var(--accent-secondary-rgb), 0.1);
+            box-shadow: 3px 3px 0 rgba(var(--accent-secondary-rgb), 0.45);
         }
 
-        /* Mock 3D Container */
+        /* Hero Guitar Container */
         .mock-3d-container {
-            margin-top: 4.5rem;
+            margin-top: 3.5rem;
             width: 100%;
-            max-width: 1000px;
-            height: 260px;
+            max-width: 1060px;
             position: relative;
-            perspective: 1000px;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
         }
 
-        .mock-guitar-neck {
-            width: 800px;
-            height: 80px;
-            background: linear-gradient(90deg, #121212, #2a2a2a);
-            margin: 0 auto;
-            border-radius: 10px 50px 50px 10px;
-            transform: rotateX(20deg) rotateY(-15deg) rotateZ(5deg);
-            box-shadow: 20px 30px 50px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(var(--accent-primary-rgb), 0.1);
-            position: relative;
-            border-bottom: 8px solid var(--accent-secondary);
-            display: flex;
-            align-items: center;
-            padding-left: 20px;
-            transition: transform 0.5s ease;
-            flex-shrink: 0;
-            transform-origin: center center;
+        .hero-guitar-img {
+            width: 100%;
+            max-width: 980px;
+            height: auto;
+            display: block;
+            object-fit: contain;
+            filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 28px rgba(var(--accent-primary-rgb), 0.12));
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .mock-guitar-neck:hover {
-            transform: rotateX(10deg) rotateY(-5deg) rotateZ(2deg);
-        }
-
-        .fret {
-            width: 3px;
-            height: 100%;
-            background: linear-gradient(to bottom, #777, #ccc, #777);
-            margin-right: 25px;
-            box-shadow: 2px 0 5px rgba(var(--accent-primary-rgb), 0.4);
+        .hero-guitar-img:hover {
+            transform: translateY(-4px) scale(1.015);
         }
 
         /* Cards and Grids */
@@ -399,15 +437,67 @@
             align-items: center;
         }
 
+        .kit-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: var(--bg-secondary);
+        }
+
         .feature-card {
             background: var(--bg-secondary);
-            border: 1px solid var(--border-subtle);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            border-right: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
             padding: 2rem;
-            border-radius: var(--radius-md);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            border-radius: 0;
+            transition: background-color 0.2s ease;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .feature-media {
+            width: 100%;
+            height: 220px;
+            background:
+                radial-gradient(circle at 50% 50%, rgba(var(--accent-primary-rgb), 0.1) 0%, transparent 70%),
+                linear-gradient(rgba(244, 243, 239, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(244, 243, 239, 0.03) 1px, transparent 1px),
+                var(--bg-primary);
+            background-size: 100% 100%, 24px 24px, 24px 24px, 100% 100%;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
             overflow: hidden;
+            position: relative;
+        }
+
+        .feature-media img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.55));
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .feature-card:hover .feature-media img {
+            transform: scale(1.04);
+        }
+
+        .feature-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .feature-card::before {
@@ -415,80 +505,161 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--accent-secondary);
-            opacity: 1;
-            transition: width 0.3s ease;
+            width: 100%;
+            height: 2px;
+            background: transparent;
+            transition: background-color 0.2s ease;
+        }
+
+        .feature-card::after {
+            content: '+';
+            position: absolute;
+            top: 0.75rem;
+            right: 0.9rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: rgba(244, 243, 239, 0.22);
+            line-height: 1;
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(var(--accent-primary-rgb), 0.35);
+            background: var(--bg-surface);
         }
 
         .feature-card:hover::before {
-            width: 8px;
+            background: var(--accent-primary);
         }
 
         .feature-card h3 {
             font-size: var(--fs-h3);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             color: var(--text-main);
+            letter-spacing: -0.02em;
         }
 
         .feature-card .highlight {
-            color: var(--accent-primary);
+            font-family: var(--font-mono);
+            color: var(--accent-secondary-text);
             font-size: var(--fs-eyebrow);
-            font-weight: 700;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.14em;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .abstract-render-box {
-            background: radial-gradient(circle, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-            border-radius: var(--radius-lg);
-            height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .kit-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+            padding: 0.2rem 0.55rem;
+            background: rgba(var(--accent-secondary-rgb), 0.14);
+            border: 1px solid rgba(var(--accent-secondary-rgb), 0.35);
+            border-radius: var(--radius-sm);
         }
 
         .download-preview-box {
-            background: linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.05), rgba(var(--accent-secondary-rgb), 0.05));
-            border-radius: var(--radius-lg);
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
             align-self: start;
-            aspect-ratio: 4 / 3;
-            height: auto;
-            min-height: 0;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid var(--border-strong);
             position: relative;
             overflow: hidden;
+            padding: 1.5rem;
+            font-family: var(--font-mono);
+        }
+
+        .manifest-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0.85rem;
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .manifest-status {
+            color: var(--accent-brass);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .manifest-status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-brass);
+            display: inline-block;
+        }
+
+        .manifest-body {
+            padding: 1.25rem 0;
+            font-size: 0.82rem;
+            line-height: 1.85;
+            color: var(--text-main);
+        }
+
+        .manifest-archive {
+            color: var(--accent-primary);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            word-break: break-all;
+        }
+
+        .manifest-tree {
+            list-style: none;
+            color: var(--text-muted);
+            padding-left: 0.25rem;
+        }
+
+        .manifest-tree li {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.75rem;
+            border-bottom: 1px dashed rgba(244, 243, 239, 0.07);
+            padding: 0.2rem 0;
+        }
+
+        .manifest-tree .file-name {
+            color: var(--text-main);
+        }
+
+        .manifest-tree .file-meta {
+            color: var(--text-muted);
+            font-size: 0.74rem;
+            white-space: nowrap;
+        }
+
+        .manifest-specs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+            font-size: 0.74rem;
+        }
+
+        .manifest-specs .spec-label {
+            color: var(--text-muted);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.15rem;
+        }
+
+        .manifest-specs .spec-val {
+            color: var(--accent-secondary-text);
+            font-weight: 600;
         }
 
         .custom-model-card {
             grid-column: 1 / -1;
             background: var(--bg-secondary);
-            padding: 3rem;
-            border-radius: var(--radius-lg);
+            padding: 2.75rem;
+            border-radius: var(--radius-sm);
             text-align: center;
-            border: 1px solid var(--border-subtle);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-strong);
+            border-left: 4px solid var(--accent-secondary);
             position: relative;
             overflow: hidden;
         }
@@ -496,17 +667,40 @@
         .print-settings-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            gap: 0;
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-secondary);
+        }
+
+        .print-settings-grid>div {
+            padding: 0.85rem 1rem;
+            border-right: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            font-family: var(--font-mono);
+        }
+
+        .print-settings-grid>div span {
+            display: block;
+            font-size: 0.72rem !important;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.2rem;
+        }
+
+        .print-settings-grid>div div {
+            font-size: 0.9rem;
         }
 
         .license-pill {
             display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
             background: var(--bg-secondary);
-            padding: 1.25rem 2.5rem;
-            border-radius: 50px;
-            margin-bottom: 3rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 1rem 1.75rem;
+            border-radius: var(--radius-sm);
+            margin-bottom: 2.5rem;
+            border: 1px solid var(--border-strong);
+            border-left: 3px solid var(--accent-primary);
             max-width: 100%;
             line-height: 1.5;
         }
@@ -525,36 +719,64 @@
         }
 
         .donate-card {
-            background: linear-gradient(to right, rgba(var(--accent-secondary-rgb), 0.1), rgba(var(--accent-primary-rgb), 0.1));
-            padding: 3rem;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-subtle);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            background: var(--bg-secondary);
+            padding: 2.75rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-strong);
+            border-top: 3px solid var(--accent-secondary);
+            position: relative;
         }
 
         /* Lists */
         .philosophy-list {
             list-style: none;
-            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 0;
         }
 
         .philosophy-list li {
-            margin-bottom: 1.5rem;
+            margin-bottom: 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-strong);
+            border-top: 3px solid var(--accent-primary);
+            border-radius: var(--radius-sm);
+            padding: 2rem 1.75rem;
             display: flex;
+            flex-direction: column;
             align-items: flex-start;
-            gap: 1rem;
-            font-size: 1.1rem;
+            gap: 0.75rem;
+            font-size: 1.02rem;
             color: var(--text-muted);
+            position: relative;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .philosophy-list li:hover {
+            background: var(--bg-surface);
+            transform: translateY(-2px);
         }
 
         .philosophy-list li strong {
             color: var(--text-main);
+            font-family: var(--font-display);
+            font-size: var(--fs-h3);
+            display: block;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
         }
 
         .philosophy-list li .icon {
-            color: var(--accent-primary);
-            font-size: 1.5rem;
+            font-family: var(--font-mono);
+            color: var(--accent-secondary-text);
+            font-size: var(--fs-eyebrow);
+            font-weight: 600;
             line-height: 1;
+            padding: 0.25rem 0.55rem;
+            background: rgba(var(--accent-secondary-rgb), 0.14);
+            border: 1px solid rgba(var(--accent-secondary-rgb), 0.35);
+            border-radius: var(--radius-sm);
             flex-shrink: 0;
         }
 
@@ -567,24 +789,23 @@
         }
 
         .scale-badge {
-            background: linear-gradient(145deg, var(--bg-secondary), #222224);
+            font-family: var(--font-mono);
+            background: var(--bg-secondary);
             padding: 2.5rem 1rem;
             text-align: center;
-            border-radius: 12px;
+            border-radius: var(--radius-sm);
             font-size: 2rem;
-            font-weight: 800;
-            border: 1px solid rgba(255, 255, 255, 0.02);
-            transition: all 0.3s ease;
+            font-weight: 700;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.2s ease;
             cursor: pointer;
             position: relative;
             overflow: hidden;
         }
 
         .scale-badge:hover {
-            transform: scale(1.05);
             border-color: var(--accent-primary);
             color: var(--accent-primary);
-            box-shadow: 0 10px 20px rgba(var(--accent-primary-rgb), 0.1);
         }
 
         /* Select Options */
@@ -592,18 +813,26 @@
             margin-bottom: 1.5rem;
         }
 
+        .select-group label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
         select {
             width: 100%;
-            padding: 1.1rem;
-            background: var(--bg-primary);
+            padding: 1rem 2.5rem 1rem 1rem;
+            font-family: var(--font-mono);
+            background: var(--bg-secondary);
             color: var(--text-main);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            font-size: 1rem;
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-sm);
+            font-size: 0.92rem;
             outline: none;
             cursor: pointer;
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2398c1e5' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 1rem center;
             background-size: 1em;
@@ -619,7 +848,7 @@
             text-align: center;
             padding: 4rem 2rem;
             background: var(--bg-secondary);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid var(--border-strong);
             margin-top: 4rem;
         }
 
@@ -716,28 +945,23 @@
                 gap: 2.75rem;
             }
 
-            .download-preview-box {
-                min-height: 240px;
-                height: 240px;
+            .kit-grid {
+                grid-template-columns: 1fr;
             }
 
-            .abstract-render-box {
-                height: 320px;
+            .philosophy-list {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+
+            .download-preview-box {
+                height: auto;
             }
         }
 
         @media (max-width: 850px) {
             .mock-3d-container {
-                margin-top: 3rem;
-                height: 180px;
-            }
-
-            .mock-guitar-neck {
-                transform: scale(0.65) rotateX(15deg) rotateY(-10deg) rotateZ(4deg);
-            }
-
-            .mock-guitar-neck:hover {
-                transform: scale(0.67) rotateX(10deg) rotateY(-5deg) rotateZ(2deg);
+                margin-top: 2.5rem;
             }
         }
 
@@ -774,12 +998,17 @@
                 width: 100%;
                 margin: 0 !important;
                 padding: 0.9rem 1.5rem;
-                font-size: 1rem;
             }
 
             .feature-card {
                 padding: 1.5rem 1.25rem;
-                border-radius: 14px;
+                border-radius: 0;
+                gap: 1.25rem;
+            }
+
+            .feature-media {
+                height: 180px;
+                padding: 1rem;
             }
 
             .feature-card h3 {
@@ -788,23 +1017,22 @@
 
             .kit-grid {
                 grid-template-columns: 1fr;
-                gap: 1.25rem;
-            }
-
-            .abstract-render-box {
-                height: 220px;
-                border-radius: 16px;
+                gap: 0;
             }
 
             .download-preview-box {
-                min-height: 190px;
-                height: 190px;
-                border-radius: 16px;
+                height: auto;
+                border-radius: var(--radius-sm);
+            }
+
+            .manifest-specs {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
             }
 
             .custom-model-card {
                 padding: 2rem 1.25rem;
-                border-radius: 14px;
+                border-radius: var(--radius-sm);
             }
 
             .custom-model-card p {
@@ -822,14 +1050,14 @@
 
             .license-pill {
                 padding: 1rem 1.25rem;
-                border-radius: 16px;
+                border-radius: var(--radius-sm);
                 margin-bottom: 2rem;
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
 
             .donate-card {
                 padding: 2rem 1.25rem;
-                border-radius: 18px;
+                border-radius: var(--radius-sm);
             }
 
             .donate-card .cta-btn {
@@ -851,11 +1079,11 @@
             }
 
             .watermark-bg div {
-                opacity: 0.5;
+                opacity: 0.7;
             }
 
             .hero-accidentals div {
-                opacity: 0.08;
+                opacity: 0.8;
             }
         }
 
@@ -863,15 +1091,6 @@
         @media (max-width: 480px) {
             .mock-3d-container {
                 margin-top: 1.75rem;
-                height: 130px;
-            }
-
-            .mock-guitar-neck {
-                transform: scale(0.42) rotateX(15deg) rotateY(-10deg) rotateZ(3deg);
-            }
-
-            .mock-guitar-neck:hover {
-                transform: scale(0.44) rotateX(10deg) rotateY(-5deg) rotateZ(2deg);
             }
         }
 
@@ -886,15 +1105,7 @@
 
             .print-settings-grid {
                 grid-template-columns: 1fr;
-                gap: 0.85rem;
-            }
-
-            .mock-3d-container {
-                height: 115px;
-            }
-
-            .mock-guitar-neck {
-                transform: scale(0.36) rotateX(15deg) rotateY(-10deg) rotateZ(3deg);
+                gap: 0;
             }
         }
 
@@ -912,10 +1123,12 @@
 
         .watermark-bg div {
             position: absolute;
-            color: rgba(255, 255, 255, 0.03);
+            color: rgba(var(--accent-primary-rgb), 0.18);
             display: flex;
             align-items: center;
             justify-content: center;
+            animation: orbitalDrift 16s linear infinite;
+            will-change: transform;
         }
 
         .watermark-bg div svg {
@@ -928,7 +1141,9 @@
             height: 16rem;
             top: 10%;
             left: 5%;
-            transform: rotate(15deg);
+            --base-rot: 15deg;
+            animation-duration: 14.3s;
+            animation-delay: -2s;
         }
 
         .watermark-bg div:nth-child(2) {
@@ -936,7 +1151,11 @@
             height: 24rem;
             top: 60%;
             left: 85%;
-            transform: rotate(-20deg);
+            --base-rot: -20deg;
+            color: rgba(var(--accent-secondary-rgb), 0.22);
+            animation-name: orbitalDriftReverse;
+            animation-duration: 19s;
+            animation-delay: -5s;
         }
 
         .watermark-bg div:nth-child(3) {
@@ -944,7 +1163,9 @@
             height: 12rem;
             top: 75%;
             left: 10%;
-            transform: rotate(5deg);
+            --base-rot: 5deg;
+            animation-duration: 12.1s;
+            animation-delay: -7s;
         }
 
         .watermark-bg div:nth-child(4) {
@@ -952,7 +1173,11 @@
             height: 16rem;
             top: 20%;
             left: 75%;
-            transform: rotate(-10deg);
+            --base-rot: -10deg;
+            color: rgba(var(--accent-secondary-rgb), 0.2);
+            animation-name: orbitalDriftReverse;
+            animation-duration: 16s;
+            animation-delay: -3s;
         }
 
         .watermark-bg div:nth-child(5) {
@@ -960,7 +1185,9 @@
             height: 20rem;
             top: 85%;
             left: 50%;
-            transform: rotate(25deg);
+            --base-rot: 25deg;
+            animation-duration: 18.7s;
+            animation-delay: -9s;
         }
 
         .watermark-bg div:nth-child(6) {
@@ -968,7 +1195,10 @@
             height: 10rem;
             top: 35%;
             left: 35%;
-            transform: rotate(-5deg);
+            --base-rot: -5deg;
+            animation-name: orbitalDriftReverse;
+            animation-duration: 13.2s;
+            animation-delay: -4s;
         }
 
         /* Hero Floating Accidentals */
@@ -986,11 +1216,12 @@
         .hero-accidentals div {
             position: absolute;
             color: var(--accent-primary);
-            opacity: 0.15;
-            animation: float 10s ease-in-out infinite;
+            opacity: 0.8;
+            animation: orbitalDrift 9.9s linear infinite;
             display: flex;
             align-items: center;
             justify-content: center;
+            will-change: transform;
         }
 
         .hero-accidentals div svg {
@@ -1003,6 +1234,8 @@
             height: 12rem;
             top: 20%;
             left: 20%;
+            --base-rot: -6deg;
+            animation-duration: 9.35s;
             animation-delay: 0s;
         }
 
@@ -1011,9 +1244,12 @@
             height: 16rem;
             top: 35%;
             right: 15%;
-            animation-delay: 2s;
+            --base-rot: 8deg;
+            animation-name: orbitalDriftReverse;
+            animation-duration: 11.55s;
+            animation-delay: -2.5s;
             color: var(--accent-secondary) !important;
-            opacity: 0.2 !important;
+            opacity: 0.8 !important;
         }
 
         .acc-3 {
@@ -1021,7 +1257,9 @@
             height: 10rem;
             top: 65%;
             left: 25%;
-            animation-delay: 4s;
+            --base-rot: 4deg;
+            animation-duration: 10.45s;
+            animation-delay: -5s;
         }
 
         .acc-4 {
@@ -1029,7 +1267,10 @@
             height: 8rem;
             top: 15%;
             right: 30%;
-            animation-delay: 1s;
+            --base-rot: -10deg;
+            animation-name: orbitalDriftReverse;
+            animation-duration: 8.58s;
+            animation-delay: -1.5s;
         }
 
         .acc-5 {
@@ -1037,7 +1278,9 @@
             height: 14rem;
             top: 75%;
             right: 25%;
-            animation-delay: 3s;
+            --base-rot: 6deg;
+            animation-duration: 12.1s;
+            animation-delay: -4s;
             color: var(--accent-primary) !important;
         }
 
@@ -1050,19 +1293,26 @@
         .nav-links a.nav-cta {
             background: var(--accent-primary);
             color: var(--bg-primary);
-            padding: 0.5rem 1.25rem;
-            border-radius: var(--radius-pill);
-            font-weight: 800;
+            padding: 0.55rem 1.15rem;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
         }
 
         .nav-links a.nav-cta:hover {
             background: var(--accent-primary-hover);
             color: var(--bg-primary);
+            transform: translateY(-1px);
+            box-shadow: 2px 2px 0 var(--accent-secondary);
         }
 
         #download h4,
         .license-label {
             color: var(--accent-secondary-text);
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 0.85rem;
         }
 
         .custom-model-card p {
@@ -1070,6 +1320,7 @@
             margin-inline: auto;
         }
 
+        #philosophy h2,
         #breakdown h2,
         #community h2 {
             margin-inline: auto;
@@ -1078,16 +1329,6 @@
         :focus-visible {
             outline: 2px solid var(--accent-primary);
             outline-offset: 3px;
-        }
-
-        @media (min-width: 1280px) {
-            .kit-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-
-            .feature-card {
-                padding: 1.75rem;
-            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1103,15 +1344,79 @@
             }
         }
 
-        @keyframes float {
+        @keyframes orbitalDrift {
+            0% {
+                transform: translate3d(0px, -16px, 0) rotate(calc(var(--base-rot, 0deg) + 0deg));
+            }
 
-            0%,
-            100% {
-                transform: translateY(0) rotate(0deg);
+            12.5% {
+                transform: translate3d(11px, -11px, 0) rotate(calc(var(--base-rot, 0deg) + 3deg));
+            }
+
+            25% {
+                transform: translate3d(16px, 0px, 0) rotate(calc(var(--base-rot, 0deg) + 5deg));
+            }
+
+            37.5% {
+                transform: translate3d(11px, 11px, 0) rotate(calc(var(--base-rot, 0deg) + 3deg));
             }
 
             50% {
-                transform: translateY(-20px) rotate(10deg);
+                transform: translate3d(0px, 16px, 0) rotate(calc(var(--base-rot, 0deg) + 0deg));
+            }
+
+            62.5% {
+                transform: translate3d(-11px, 11px, 0) rotate(calc(var(--base-rot, 0deg) - 3deg));
+            }
+
+            75% {
+                transform: translate3d(-16px, 0px, 0) rotate(calc(var(--base-rot, 0deg) - 5deg));
+            }
+
+            87.5% {
+                transform: translate3d(-11px, -11px, 0) rotate(calc(var(--base-rot, 0deg) - 3deg));
+            }
+
+            100% {
+                transform: translate3d(0px, -16px, 0) rotate(calc(var(--base-rot, 0deg) + 0deg));
+            }
+        }
+
+        @keyframes orbitalDriftReverse {
+            0% {
+                transform: translate3d(0px, 16px, 0) rotate(calc(var(--base-rot, 0deg) + 0deg));
+            }
+
+            12.5% {
+                transform: translate3d(11px, 11px, 0) rotate(calc(var(--base-rot, 0deg) - 3deg));
+            }
+
+            25% {
+                transform: translate3d(16px, 0px, 0) rotate(calc(var(--base-rot, 0deg) - 5deg));
+            }
+
+            37.5% {
+                transform: translate3d(11px, -11px, 0) rotate(calc(var(--base-rot, 0deg) - 3deg));
+            }
+
+            50% {
+                transform: translate3d(0px, -16px, 0) rotate(calc(var(--base-rot, 0deg) + 0deg));
+            }
+
+            62.5% {
+                transform: translate3d(-11px, -11px, 0) rotate(calc(var(--base-rot, 0deg) + 3deg));
+            }
+
+            75% {
+                transform: translate3d(-16px, 0px, 0) rotate(calc(var(--base-rot, 0deg) + 5deg));
+            }
+
+            87.5% {
+                transform: translate3d(-11px, 11px, 0) rotate(calc(var(--base-rot, 0deg) + 3deg));
+            }
+
+            100% {
+                transform: translate3d(0px, 16px, 0) rotate(calc(var(--base-rot, 0deg) + 0deg));
             }
         }
     </style>
@@ -1227,67 +1532,38 @@
         </div>
 
         <div class="mock-3d-container">
-            <div class="mock-guitar-neck">
-                <div class="fret"></div>
-                <div class="fret"></div>
-                <div class="fret"></div>
-                <div class="fret"></div>
-                <div class="fret"></div>
-                <div class="fret"></div>
-                <div class="fret"></div>
-                <div class="fret"></div>
-                <div class="fret"></div>
-                <div class="fret"></div>
-                <div class="fret"></div>
-                <div class="fret"></div>
-                <div class="fret"></div>
-                <div class="fret"></div>
-                <div class="fret"></div>
-                <div class="fret"></div>
-                <div class="fret"></div>
-                <div class="fret"></div>
-            </div>
+            <img src="assets/GuitarImageTest1.png"
+                alt="Electric guitar equipped with the MF3D 3D-printed microtonal fretboard"
+                class="hero-guitar-img">
         </div>
     </section>
 
-    <section id="philosophy" class="grid-2">
-        <div>
+    <section id="philosophy">
+        <div style="text-align: center; margin-bottom: 3.5rem;">
             <h2>The Vision</h2>
-            <p class="lead" style="margin-bottom: 1rem;">
+            <p class="lead" style="margin: 0 auto;">
                 Traditional microtonal lutherie is expensive, permanent, and difficult. MF3D changes the game by
                 leveraging accessible 3D printing.
             </p>
-            <ul class="philosophy-list">
-                <li>
-                    <span class="icon">✦</span>
-                    <div><strong>Microtonal Made Easy:</strong> Slide-in fretboard mechanism for quick scale
-                        explorations
-                        without removing strings.</div>
-                </li>
-                <li>
-                    <span class="icon">✦</span>
-                    <div><strong>Zero Damage:</strong> Easy installation, totally reversible. No glue or drilling
-                        required.</div>
-                </li>
-                <li>
-                    <span class="icon">✦</span>
-                    <div><strong>Your Setup:</strong> Keep your current bridge and intonation
-                        mostly intact.</div>
-                </li>
-                <li>
-                    <span class="icon">✦</span>
-                    <div><strong>Low Cost:</strong> Print it yourself DIY-style, or use third-party 3D printing
-                        services.</div>
-                </li>
-            </ul>
         </div>
-        <div class="abstract-render-box">
-            <div
-                style="position: absolute; width: 200px; height: 200px; background: var(--accent-secondary); filter: blur(100px); opacity: 0.2;">
-            </div>
-            <p style="color: var(--text-muted); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">[
-                Abstract Render ]</p>
-        </div>
+        <ul class="philosophy-list">
+            <li>
+                <span class="icon">01</span>
+                <div><strong>Microtonal Made Easy</strong>Slide-in fretboard mechanism for quick scale
+                    explorations
+                    without removing strings.</div>
+            </li>
+            <li>
+                <span class="icon">02</span>
+                <div><strong>Zero Damage</strong>Easy installation, totally reversible. No glue or drilling
+                    required.</div>
+            </li>
+            <li>
+                <span class="icon">03</span>
+                <div><strong>Low Cost</strong>Print it yourself DIY-style, or use third-party 3D printing
+                    services.</div>
+            </li>
+        </ul>
     </section>
 
     <section id="breakdown">
@@ -1299,28 +1575,48 @@
 
         <div class="kit-grid">
             <div class="feature-card">
-                <span class="highlight">01. The Foundation</span>
-                <h3>The Base Piece</h3>
-                <p style="color: var(--text-muted);">Attaches to the top of the neck and frets via double-sided tape.
-                    Features sliding slots for the fretboard.</p>
+                <div class="feature-media">
+                    <img src="assets/BasePiece.png" alt="3D render of the MF3D Base Piece with sliding dovetail slots" loading="lazy">
+                </div>
+                <div class="feature-content">
+                    <span class="highlight">01. The Foundation</span>
+                    <h3>The Base Piece</h3>
+                    <p style="color: var(--text-muted);">Attaches to the top of the neck and frets via double-sided tape.
+                        Features sliding slots for the fretboard.</p>
+                </div>
             </div>
             <div class="feature-card">
-                <span class="highlight">02. The Heart</span>
-                <h3>The Fretboard</h3>
-                <p style="color: var(--text-muted);">Slides smoothly into the base piece. Easily hot-swappable. Supports
-                    print-in-place frets, modular slide-ins, or standard wire frets.</p>
+                <div class="feature-media">
+                    <img src="assets/Fretboard.png" alt="3D render of the interchangeable MF3D Microtonal Fretboard" loading="lazy">
+                </div>
+                <div class="feature-content">
+                    <span class="highlight">02. The Heart</span>
+                    <h3>The Fretboard</h3>
+                    <p style="color: var(--text-muted);">Slides smoothly into the base piece. Easily hot-swappable. Supports
+                        print-in-place frets, modular slide-ins, or standard wire frets.</p>
+                </div>
             </div>
             <div class="feature-card">
-                <span class="highlight">03. The Elevation</span>
-                <h3>The Overnut</h3>
-                <p style="color: var(--text-muted);">Goes over the current nut without unmounting it, elegantly
-                    elevating the strings to the new fretboard height.</p>
+                <div class="feature-media">
+                    <img src="assets/OverNut.png" alt="3D render of the MF3D Overnut piece" loading="lazy">
+                </div>
+                <div class="feature-content">
+                    <span class="highlight">03. The Elevation</span>
+                    <h3>The Overnut</h3>
+                    <p style="color: var(--text-muted);">Goes over the current nut without unmounting it, elegantly
+                        elevating the strings to the new fretboard height.</p>
+                </div>
             </div>
             <div class="feature-card">
-                <span class="highlight">04. The Compensation</span>
-                <h3>Bridge Studs</h3>
-                <p style="color: var(--text-muted);">Fit around current bridge screws to elevate the bridge, preserving
-                    intonation without replacing metal hardware.</p>
+                <div class="feature-media">
+                    <img src="assets/BridgeSupport.png" alt="3D render of the MF3D Bridge Stud elevation support" loading="lazy">
+                </div>
+                <div class="feature-content">
+                    <span class="highlight">04. The Compensation</span>
+                    <h3>Bridge Studs</h3>
+                    <p style="color: var(--text-muted);">Fit around current bridge screws to elevate the bridge, preserving
+                        intonation without replacing metal hardware.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1350,7 +1646,7 @@
         <div>
             <h2>Free Download</h2>
             <p class="lead" style="margin-bottom: 2.5rem;">Select your instrument model and
-                tuning preference to get the customized STL files alongside the installation instructions.</p>
+                tuning preference to get the customized STL files and installation instructions.</p>
 
             <div class="select-group">
                 <label for="model-select"
@@ -1401,18 +1697,52 @@
             </div>
         </div>
 
-        <div class="download-preview-box">
-            <div
-                style="position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at top right, rgba(var(--accent-primary-rgb),0.1), transparent 50%); border-radius: 24px;">
+        <div class="download-preview-box" aria-live="polite">
+            <div class="manifest-header">
+                <span>PACKAGE MANIFEST // STL BUNDLE</span>
+                <span class="manifest-status">READY TO SLICE</span>
             </div>
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 24 24' fill='none' stroke='%2398c1e5' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='7 10 12 15 17 10'/%3E%3Cline x1='12' y1='15' x2='12' y2='3'/%3E%3C/svg%3E"
-                alt="" aria-hidden="true"
-                style="opacity: 0.8; z-index: 1; filter: drop-shadow(0 0 20px rgba(var(--accent-primary-rgb),0.3));">
+            <div class="manifest-body">
+                <div class="manifest-archive" id="manifest-zip">📦 mf3d_strat_modern_c_19edo.zip</div>
+                <ul class="manifest-tree">
+                    <li>
+                        <span>├── <span class="file-name" id="file-base">01_base_rail_strat_mc.stl</span></span>
+                        <span class="file-meta">1.4 MB</span>
+                    </li>
+                    <li>
+                        <span>├── <span class="file-name" id="file-fb">02_fretboard_19edo_complete.stl</span></span>
+                        <span class="file-meta">3.8 MB</span>
+                    </li>
+                    <li>
+                        <span>├── <span class="file-name" id="file-nut">03_overnut_42.0mm.stl</span></span>
+                        <span class="file-meta">0.4 MB</span>
+                    </li>
+                    <li>
+                        <span>├── <span class="file-name" id="file-studs">04_bridge_studs_pair.stl</span></span>
+                        <span class="file-meta">0.6 MB</span>
+                    </li>
+                    <li>
+                        <span>└── <span class="file-name">README_calibration_guide.pdf</span></span>
+                        <span class="file-meta">0.3 MB</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="manifest-specs">
+                <div>
+                    <span class="spec-label">Scale Length</span>
+                    <span class="spec-val" id="spec-scale-len">25.5" (647.7 mm)</span>
+                </div>
+                <div>
+                    <span class="spec-label">Step Interval</span>
+                    <span class="spec-val" id="spec-step-cents">63.16 cents</span>
+                </div>
+                <div>
+                    <span class="spec-label">Neck Profile</span>
+                    <span class="spec-val" id="spec-profile">9.5" Radius / Modern C</span>
+                </div>
+            </div>
         </div>
         <div class="custom-model-card">
-            <div
-                style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(var(--accent-primary-rgb),0.03) 0%, transparent 50%); z-index: 0; pointer-events: none;">
-            </div>
             <div style="position: relative; z-index: 1;">
                 <h3 class="card-title-lg">Need a custom model?</h3>
                 <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.6;">While we
@@ -1481,6 +1811,43 @@
                     navToggle.setAttribute('aria-expanded', 'false');
                 }
             });
+        }
+
+        // Dynamic CAD Package Manifest update
+        const modelSelect = document.getElementById('model-select');
+        const scaleSelect = document.getElementById('scale-select');
+
+        const modelSpecs = {
+            0: { slug: 'strat_mc', nut: '42.0mm', scaleLen: '25.5" (647.7 mm)', profile: '9.5" Radius / Modern C' },
+            1: { slug: 'lespaul_st', nut: '43.0mm', scaleLen: '24.75" (628.6 mm)', profile: '12" Radius / Slim Taper' },
+            2: { slug: 'ibanez_rg_w3', nut: '43.0mm', scaleLen: '25.5" (647.7 mm)', profile: '15.75" Radius / Wizard III' },
+            3: { slug: 'jazzbass_mc', nut: '38.1mm', scaleLen: '34.0" (863.6 mm)', profile: '9.5" Radius / Modern C' },
+            4: { slug: 'yamaha_trbx', nut: '38.0mm', scaleLen: '34.0" (863.6 mm)', profile: '10" Radius / Slim C' }
+        };
+
+        const edoSpecs = {
+            0: { slug: '19edo', cents: '63.16 cents (19 EDO)' },
+            1: { slug: '22edo', cents: '54.55 cents (22 EDO)' },
+            2: { slug: '31edo', cents: '38.71 cents (31 EDO)' }
+        };
+
+        function updateManifest() {
+            if (!modelSelect || !scaleSelect) return;
+            const m = modelSpecs[modelSelect.selectedIndex] || modelSpecs[0];
+            const s = edoSpecs[scaleSelect.selectedIndex] || edoSpecs[0];
+
+            document.getElementById('manifest-zip').textContent = `📦 mf3d_${m.slug}_${s.slug}.zip`;
+            document.getElementById('file-base').textContent = `01_base_rail_${m.slug}.stl`;
+            document.getElementById('file-fb').textContent = `02_fretboard_${s.slug}_complete.stl`;
+            document.getElementById('file-nut').textContent = `03_overnut_${m.nut}.stl`;
+            document.getElementById('spec-scale-len').textContent = m.scaleLen;
+            document.getElementById('spec-step-cents').textContent = s.cents;
+            document.getElementById('spec-profile').textContent = m.profile;
+        }
+
+        if (modelSelect && scaleSelect) {
+            modelSelect.addEventListener('change', updateManifest);
+            scaleSelect.addEventListener('change', updateManifest);
         }
     </script>
 </body>
