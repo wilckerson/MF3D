@@ -152,6 +152,23 @@
             pointer-events: none;
         }
 
+        nav .logo-icon,
+        footer .logo-icon {
+            width: 28px;
+            height: 24px;
+            border: none;
+            background: transparent;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        nav .logo-icon::after,
+        footer .logo-icon::after {
+            display: none;
+        }
+
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -413,6 +430,31 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            isolation: isolate;
+        }
+
+        .mock-3d-container::before {
+            content: '';
+            position: absolute;
+            inset: -12% -4% -6%;
+            background:
+                radial-gradient(ellipse 46% 42% at 38% 42%, rgba(var(--accent-primary-rgb), 0.16) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 44% at 76% 58%, rgba(var(--accent-secondary-rgb), 0.12) 0%, transparent 72%);
+            filter: blur(18px);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .mock-3d-container::after {
+            content: '';
+            position: absolute;
+            left: 10%;
+            right: 6%;
+            bottom: -4%;
+            height: 26%;
+            background: radial-gradient(ellipse 68% 55% at 54% 50%, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.45) 48%, transparent 76%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         .hero-guitar-img {
@@ -421,12 +463,21 @@
             height: auto;
             display: block;
             object-fit: contain;
-            filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 28px rgba(var(--accent-primary-rgb), 0.12));
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            filter:
+                contrast(1.04)
+                brightness(0.95)
+                drop-shadow(0 28px 44px rgba(0, 0, 0, 0.92))
+                drop-shadow(0 0 26px rgba(var(--accent-primary-rgb), 0.14));
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
         }
 
         .hero-guitar-img:hover {
             transform: translateY(-4px) scale(1.015);
+            filter:
+                contrast(1.05)
+                brightness(0.97)
+                drop-shadow(0 34px 52px rgba(0, 0, 0, 0.94))
+                drop-shadow(0 0 34px rgba(var(--accent-primary-rgb), 0.2));
         }
 
         /* Cards and Grids */
@@ -1468,7 +1519,17 @@
 
     <nav>
         <a href="#" class="logo">
-            <div class="logo-icon"></div>
+            <div class="logo-icon">
+                <svg width="28" height="24" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M2.5 6.5L25.5 3.5V20.5L2.5 17.5V6.5Z" fill="#151618" stroke="#98c1e5" stroke-width="1.5" stroke-linejoin="round"/>
+                    <path d="M5.5 6.2V17.8" stroke="#f4f3ef" stroke-width="1.75"/>
+                    <path d="M5.5 9L25.5 7.2M5.5 12H25.5M5.5 15L25.5 16.8" stroke="#f4f3ef" stroke-opacity="0.3" stroke-width="1"/>
+                    <path d="M10 5.6V13.5" stroke="#955251" stroke-width="1.75"/>
+                    <path d="M14 10.5V19" stroke="#d4a853" stroke-width="1.75"/>
+                    <path d="M18 4.5V12" stroke="#98c1e5" stroke-width="1.75"/>
+                    <path d="M21.5 12V20" stroke="#955251" stroke-width="1.75"/>
+                </svg>
+            </div>
             MF3D
         </a>
         <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -1532,9 +1593,10 @@
         </div>
 
         <div class="mock-3d-container">
-            <img src="assets/GuitarImageTest1.png"
+            <img src="assets/GuitarImageTest1.png?v=3"
                 alt="Electric guitar equipped with the MF3D 3D-printed microtonal fretboard"
-                class="hero-guitar-img">
+                class="hero-guitar-img"
+                referrerPolicy="no-referrer">
         </div>
     </section>
 
@@ -1760,7 +1822,17 @@
 
     <footer>
         <a href="#" class="logo" style="justify-content: center; margin-bottom: 1.5rem;">
-            <div class="logo-icon"></div>
+            <div class="logo-icon">
+                <svg width="28" height="24" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M2.5 6.5L25.5 3.5V20.5L2.5 17.5V6.5Z" fill="#151618" stroke="#98c1e5" stroke-width="1.5" stroke-linejoin="round"/>
+                    <path d="M5.5 6.2V17.8" stroke="#f4f3ef" stroke-width="1.75"/>
+                    <path d="M5.5 9L25.5 7.2M5.5 12H25.5M5.5 15L25.5 16.8" stroke="#f4f3ef" stroke-opacity="0.3" stroke-width="1"/>
+                    <path d="M10 5.6V13.5" stroke="#955251" stroke-width="1.75"/>
+                    <path d="M14 10.5V19" stroke="#d4a853" stroke-width="1.75"/>
+                    <path d="M18 4.5V12" stroke="#98c1e5" stroke-width="1.75"/>
+                    <path d="M21.5 12V20" stroke="#955251" stroke-width="1.75"/>
+                </svg>
+            </div>
             MF3D
         </a>
         <p style="font-size: 0.95rem;">Built with passion by Wilckerson. Licensed under <a
