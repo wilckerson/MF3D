@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>MF3D | Microtonal Fretboard 3D Printed</title>
     <meta name="description"
-        content="MF3D is a 100% free, 3D-printable kit that gives your guitar or bass fully interchangeable microtonal fretboards (19, 22 and 31 EDO) with zero permanent modifications.">
+        content="MF3D is a 100% free, 3D-printable kit that gives your guitar or bass fully interchangeable microtonal fretboards (19, 22, and 31 EDO) with zero permanent modifications.">
     <meta name="theme-color" content="#0a0a0a">
     <meta property="og:type" content="website">
     <meta property="og:title" content="MF3D | Microtonal Fretboard 3D Printed">
@@ -55,8 +55,8 @@
             --radius-md: 8px;
             --radius-lg: 10px;
             --radius-pill: 999px;
-            --border-subtle: rgba(244, 243, 239, 0.12);
-            --border-strong: rgba(244, 243, 239, 0.24);
+            --border-subtle: rgba(244, 243, 239, 0.045);
+            --border-strong: rgba(244, 243, 239, 0.14);
         }
 
         * {
@@ -99,8 +99,8 @@
             pointer-events: none;
             z-index: -2;
             background-image:
-                linear-gradient(rgba(var(--accent-secondary-rgb), 0.15) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(var(--accent-secondary-rgb), 0.15) 1px, transparent 1px);
+                linear-gradient(rgba(244, 243, 239, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(244, 243, 239, 0.03) 1px, transparent 1px);
             background-size: 40px 40px;
         }
 
@@ -248,32 +248,6 @@
             position: relative;
         }
 
-        section:not(.hero)::before {
-            content: '+';
-            position: absolute;
-            top: -0.65rem;
-            left: 2rem;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--accent-secondary-text);
-            background: var(--bg-primary);
-            padding: 0 0.35rem;
-            line-height: 1;
-        }
-
-        section:not(.hero)::after {
-            content: '+';
-            position: absolute;
-            top: -0.65rem;
-            right: 2rem;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--accent-secondary-text);
-            background: var(--bg-primary);
-            padding: 0 0.35rem;
-            line-height: 1;
-        }
-
         section[id] {
             scroll-margin-top: 80px;
         }
@@ -405,20 +379,18 @@
         .cta-btn:hover {
             background-color: var(--accent-primary-hover);
             transform: translateY(-1px);
-            box-shadow: 3px 3px 0 var(--accent-secondary);
         }
 
         .cta-btn.secondary {
-            background-color: transparent;
+            background-color: rgba(244, 243, 239, 0.06);
             color: var(--text-main);
             border: 1px solid var(--border-strong);
         }
 
         .cta-btn.secondary:hover {
-            border-color: var(--accent-secondary-text);
-            color: var(--accent-secondary-text);
-            background-color: rgba(var(--accent-secondary-rgb), 0.1);
-            box-shadow: 3px 3px 0 rgba(var(--accent-secondary-rgb), 0.45);
+            border-color: rgba(244, 243, 239, 0.34);
+            color: var(--text-main);
+            background-color: rgba(244, 243, 239, 0.12);
         }
 
         /* Hero Guitar Container */
@@ -464,20 +436,14 @@
             display: block;
             object-fit: contain;
             filter:
-                contrast(1.04)
-                brightness(0.95)
-                drop-shadow(0 28px 44px rgba(0, 0, 0, 0.92))
-                drop-shadow(0 0 26px rgba(var(--accent-primary-rgb), 0.14));
+                contrast(1.04) brightness(0.95) drop-shadow(0 28px 44px rgba(0, 0, 0, 0.92)) drop-shadow(0 0 26px rgba(var(--accent-primary-rgb), 0.14));
             transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
         }
 
         .hero-guitar-img:hover {
             transform: translateY(-4px) scale(1.015);
             filter:
-                contrast(1.05)
-                brightness(0.97)
-                drop-shadow(0 34px 52px rgba(0, 0, 0, 0.94))
-                drop-shadow(0 0 34px rgba(var(--accent-primary-rgb), 0.2));
+                contrast(1.05) brightness(0.97) drop-shadow(0 34px 52px rgba(0, 0, 0, 0.94)) drop-shadow(0 0 34px rgba(var(--accent-primary-rgb), 0.2));
         }
 
         /* Cards and Grids */
@@ -490,12 +456,26 @@
 
         .kit-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(6, 1fr);
             gap: 0;
-            border: 1px solid var(--border-strong);
+            border: 1px solid var(--border-subtle);
             border-radius: var(--radius-md);
             overflow: hidden;
             background: var(--bg-secondary);
+        }
+
+        .kit-grid .feature-card {
+            grid-column: span 3;
+        }
+
+        .kit-grid .feature-card:nth-child(n+3) {
+            grid-column: span 2;
+            border-bottom: none;
+        }
+
+        .kit-grid .feature-card:nth-child(2),
+        .kit-grid .feature-card:nth-child(5) {
+            border-right: none;
         }
 
         .feature-card {
@@ -551,34 +531,8 @@
             align-items: flex-start;
         }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: transparent;
-            transition: background-color 0.2s ease;
-        }
-
-        .feature-card::after {
-            content: '+';
-            position: absolute;
-            top: 0.75rem;
-            right: 0.9rem;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: rgba(244, 243, 239, 0.22);
-            line-height: 1;
-        }
-
         .feature-card:hover {
             background: var(--bg-surface);
-        }
-
-        .feature-card:hover::before {
-            background: var(--accent-primary);
         }
 
         .feature-card h3 {
@@ -595,112 +549,34 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.65rem;
             display: inline-block;
-            padding: 0.2rem 0.55rem;
-            background: rgba(var(--accent-secondary-rgb), 0.14);
-            border: 1px solid rgba(var(--accent-secondary-rgb), 0.35);
-            border-radius: var(--radius-sm);
         }
 
-        .download-preview-box {
+        .print-settings-card {
             background: var(--bg-secondary);
             border-radius: var(--radius-sm);
-            align-self: start;
+            border: 1px solid var(--border-subtle);
+            padding: 2rem;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            border: 1px solid var(--border-strong);
-            position: relative;
-            overflow: hidden;
-            padding: 1.5rem;
-            font-family: var(--font-mono);
+            gap: 1.5rem;
         }
 
-        .manifest-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 0.85rem;
-            border-bottom: 1px solid var(--border-subtle);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        .manifest-status {
-            color: var(--accent-brass);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .manifest-status::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--accent-brass);
-            display: inline-block;
-        }
-
-        .manifest-body {
-            padding: 1.25rem 0;
-            font-size: 0.82rem;
-            line-height: 1.85;
-            color: var(--text-main);
-        }
-
-        .manifest-archive {
-            color: var(--accent-primary);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            word-break: break-all;
-        }
-
-        .manifest-tree {
-            list-style: none;
-            color: var(--text-muted);
-            padding-left: 0.25rem;
-        }
-
-        .manifest-tree li {
-            display: flex;
-            justify-content: space-between;
-            gap: 0.75rem;
-            border-bottom: 1px dashed rgba(244, 243, 239, 0.07);
-            padding: 0.2rem 0;
-        }
-
-        .manifest-tree .file-name {
-            color: var(--text-main);
-        }
-
-        .manifest-tree .file-meta {
-            color: var(--text-muted);
-            font-size: 0.74rem;
-            white-space: nowrap;
-        }
-
-        .manifest-specs {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.75rem;
-            padding-top: 1rem;
+        .print-settings-footer {
+            padding-top: 1.5rem;
             border-top: 1px solid var(--border-subtle);
-            font-size: 0.74rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.15rem;
         }
 
-        .manifest-specs .spec-label {
+        .print-settings-footer p {
             color: var(--text-muted);
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 0.15rem;
-        }
-
-        .manifest-specs .spec-val {
-            color: var(--accent-secondary-text);
-            font-weight: 600;
+            font-size: 0.96rem;
+            line-height: 1.65;
+            margin: 0;
         }
 
         .custom-model-card {
@@ -709,10 +585,17 @@
             padding: 2.75rem;
             border-radius: var(--radius-sm);
             text-align: center;
-            border: 1px solid var(--border-strong);
-            border-left: 4px solid var(--accent-secondary);
+            border: 1px solid var(--border-subtle);
             position: relative;
             overflow: hidden;
+        }
+
+        .custom-model-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .print-settings-grid {
@@ -720,7 +603,9 @@
             grid-template-columns: 1fr 1fr;
             gap: 0;
             border: 1px solid var(--border-subtle);
-            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            background: var(--bg-primary);
         }
 
         .print-settings-grid>div {
@@ -746,12 +631,12 @@
             display: inline-block;
             font-family: var(--font-mono);
             font-size: 0.9rem;
-            background: var(--bg-secondary);
-            padding: 1rem 1.75rem;
-            border-radius: var(--radius-sm);
+            background: transparent;
+            padding: 0.85rem 0.25rem;
+            border-radius: 0;
             margin-bottom: 2.5rem;
-            border: 1px solid var(--border-strong);
-            border-left: 3px solid var(--accent-primary);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
             max-width: 100%;
             line-height: 1.5;
         }
@@ -773,8 +658,7 @@
             background: var(--bg-secondary);
             padding: 2.75rem;
             border-radius: var(--radius-sm);
-            border: 1px solid var(--border-strong);
-            border-top: 3px solid var(--accent-secondary);
+            border: 1px solid var(--border-subtle);
             position: relative;
         }
 
@@ -790,8 +674,7 @@
         .philosophy-list li {
             margin-bottom: 0;
             background: var(--bg-secondary);
-            border: 1px solid var(--border-strong);
-            border-top: 3px solid var(--accent-primary);
+            border: 1px solid var(--border-subtle);
             border-radius: var(--radius-sm);
             padding: 2rem 1.75rem;
             display: flex;
@@ -801,12 +684,12 @@
             font-size: 1.02rem;
             color: var(--text-muted);
             position: relative;
-            transition: background-color 0.2s ease, transform 0.2s ease;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
         }
 
         .philosophy-list li:hover {
             background: var(--bg-surface);
-            transform: translateY(-2px);
+            border-color: var(--border-strong);
         }
 
         .philosophy-list li strong {
@@ -823,11 +706,8 @@
             color: var(--accent-secondary-text);
             font-size: var(--fs-eyebrow);
             font-weight: 600;
+            letter-spacing: 0.08em;
             line-height: 1;
-            padding: 0.25rem 0.55rem;
-            background: rgba(var(--accent-secondary-rgb), 0.14);
-            border: 1px solid rgba(var(--accent-secondary-rgb), 0.35);
-            border-radius: var(--radius-sm);
             flex-shrink: 0;
         }
 
@@ -899,7 +779,7 @@
             text-align: center;
             padding: 4rem 2rem;
             background: var(--bg-secondary);
-            border-top: 1px solid var(--border-strong);
+            border-top: 1px solid var(--border-subtle);
             margin-top: 4rem;
         }
 
@@ -964,7 +844,7 @@
                 background: rgba(10, 10, 10, 0.96);
                 backdrop-filter: blur(20px);
                 -webkit-backdrop-filter: blur(20px);
-                border-bottom: 1px solid rgba(var(--accent-secondary-rgb), 0.3);
+                border-bottom: 1px solid var(--border-subtle);
                 flex-direction: column;
                 padding: 1.75rem 1.5rem;
                 gap: 1.25rem;
@@ -1000,13 +880,20 @@
                 grid-template-columns: 1fr;
             }
 
+            .kit-grid .feature-card,
+            .kit-grid .feature-card:nth-child(n+3) {
+                grid-column: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+
+            .kit-grid .feature-card:last-child {
+                border-bottom: none;
+            }
+
             .philosophy-list {
                 grid-template-columns: 1fr;
                 gap: 1.25rem;
-            }
-
-            .download-preview-box {
-                height: auto;
             }
         }
 
@@ -1071,14 +958,8 @@
                 gap: 0;
             }
 
-            .download-preview-box {
-                height: auto;
-                border-radius: var(--radius-sm);
-            }
-
-            .manifest-specs {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
+            .print-settings-card {
+                padding: 1.5rem 1.25rem;
             }
 
             .custom-model-card {
@@ -1091,6 +972,11 @@
                 margin-bottom: 1.5rem !important;
             }
 
+            .custom-model-actions {
+                flex-direction: column;
+                gap: 0.85rem;
+            }
+
             .custom-model-card .cta-btn {
                 width: 100%;
             }
@@ -1100,8 +986,8 @@
             }
 
             .license-pill {
-                padding: 1rem 1.25rem;
-                border-radius: var(--radius-sm);
+                padding: 0.85rem 0.25rem;
+                border-radius: 0;
                 margin-bottom: 2rem;
                 font-size: 0.85rem;
             }
@@ -1354,7 +1240,6 @@
             background: var(--accent-primary-hover);
             color: var(--bg-primary);
             transform: translateY(-1px);
-            box-shadow: 2px 2px 0 var(--accent-secondary);
         }
 
         #download h4,
@@ -1373,8 +1258,296 @@
 
         #philosophy h2,
         #breakdown h2,
+        #whos-using h2,
         #community h2 {
             margin-inline: auto;
+        }
+
+        /* Who's Using / Beta Testers */
+        .users-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .user-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+            position: relative;
+        }
+
+        .user-card:hover {
+            background: var(--bg-surface);
+            border-color: var(--border-strong);
+            transform: translateY(-2px);
+        }
+
+        .user-photo {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .user-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .user-photo img.photo-daniel {
+            object-position: 50% 22%;
+        }
+
+
+        .user-photo img.photo-stephen {
+            object-position: 46% 24%;
+            transform: scale(1.12);
+            transform-origin: 44% 38%;
+        }
+
+        .user-card:hover .user-photo img.photo-daniel {
+            transform: scale(1.04);
+        }
+
+        .user-card:hover .user-photo img.photo-praveen {
+            transform: scale(2.12);
+        }
+
+        .user-card:hover .user-photo img.photo-stephen {
+            transform: scale(1.17);
+        }
+
+        .user-photo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(12, 12, 13, 0.72) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .user-badge {
+            position: absolute;
+            bottom: 0.75rem;
+            left: 0.85rem;
+            z-index: 1;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-main);
+            background: rgba(12, 12, 13, 0.82);
+            border: 1px solid var(--border-strong);
+            padding: 0.25rem 0.55rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .user-body {
+            padding: 1.5rem 1.5rem 1.65rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 1;
+            gap: 1.25rem;
+        }
+
+        .user-quote {
+            font-size: 0.98rem;
+            line-height: 1.65;
+            color: var(--text-main);
+            margin: 0;
+            position: relative;
+            padding-left: 0.95rem;
+            border-left: 2px solid var(--accent-secondary);
+        }
+
+        .user-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .user-name-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.35rem 0.75rem;
+        }
+
+        .user-meta h3 {
+            font-size: var(--fs-h3);
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .user-instrument {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--accent-primary);
+            white-space: nowrap;
+        }
+
+        .user-feedback-tag {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .users-cta-note {
+            margin-top: 2.25rem;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .users-cta-note a {
+            color: var(--accent-primary);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .users-cta-note a:hover {
+            color: var(--text-main);
+        }
+
+        @media (max-width: 900px) {
+            .users-grid {
+                grid-template-columns: 1fr;
+                max-width: 460px;
+                margin-inline: auto;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .user-body {
+                padding: 1.25rem;
+            }
+        }
+
+        /* About Me Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .about-photo-frame {
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        .about-photo-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .about-caption {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-top: 1px solid var(--border-subtle);
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+        }
+
+        .about-caption .about-location {
+            color: var(--accent-primary);
+            white-space: nowrap;
+        }
+
+        .about-eyebrow {
+            font-family: var(--font-mono);
+            color: var(--accent-secondary-text);
+            font-size: var(--fs-eyebrow);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+        }
+
+        .about-content h2 {
+            margin-bottom: 1.25rem;
+        }
+
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+            color: var(--text-muted);
+            font-size: 1.04rem;
+            line-height: 1.75;
+            margin-bottom: 2rem;
+        }
+
+        .about-text strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .about-text a {
+            color: var(--accent-primary);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .about-text a:hover {
+            color: var(--text-main);
+        }
+
+        .about-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2.25rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .about-actions .cta-btn {
+                width: 100%;
+            }
+
+            .about-caption {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+            }
         }
 
         :focus-visible {
@@ -1520,14 +1693,17 @@
     <nav>
         <a href="#" class="logo">
             <div class="logo-icon">
-                <svg width="28" height="24" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M2.5 6.5L25.5 3.5V20.5L2.5 17.5V6.5Z" fill="#151618" stroke="#98c1e5" stroke-width="1.5" stroke-linejoin="round"/>
-                    <path d="M5.5 6.2V17.8" stroke="#f4f3ef" stroke-width="1.75"/>
-                    <path d="M5.5 9L25.5 7.2M5.5 12H25.5M5.5 15L25.5 16.8" stroke="#f4f3ef" stroke-opacity="0.3" stroke-width="1"/>
-                    <path d="M10 5.6V13.5" stroke="#955251" stroke-width="1.75"/>
-                    <path d="M14 10.5V19" stroke="#d4a853" stroke-width="1.75"/>
-                    <path d="M18 4.5V12" stroke="#98c1e5" stroke-width="1.75"/>
-                    <path d="M21.5 12V20" stroke="#955251" stroke-width="1.75"/>
+                <svg width="28" height="24" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true">
+                    <path d="M2.5 6.5L25.5 3.5V20.5L2.5 17.5V6.5Z" fill="#151618" stroke="#98c1e5" stroke-width="1.5"
+                        stroke-linejoin="round" />
+                    <path d="M5.5 6.2V17.8" stroke="#f4f3ef" stroke-width="1.75" />
+                    <path d="M5.5 9L25.5 7.2M5.5 12H25.5M5.5 15L25.5 16.8" stroke="#f4f3ef" stroke-opacity="0.3"
+                        stroke-width="1" />
+                    <path d="M10 5.6V13.5" stroke="#955251" stroke-width="1.75" />
+                    <path d="M14 10.5V19" stroke="#d4a853" stroke-width="1.75" />
+                    <path d="M18 4.5V12" stroke="#98c1e5" stroke-width="1.75" />
+                    <path d="M21.5 12V20" stroke="#955251" stroke-width="1.75" />
                 </svg>
             </div>
             MF3D
@@ -1540,7 +1716,9 @@
         <div class="nav-links" id="nav-links">
             <a href="#philosophy">The Vision</a>
             <a href="#breakdown">The Kit</a>
+            <a href="#whos-using">Who's Using MF3D</a>
             <a href="#community">Community</a>
+            <a href="#about">About Me</a>
             <a href="#download" class="nav-cta">Download</a>
         </div>
     </nav>
@@ -1588,14 +1766,13 @@
             with zero permanent modifications.
         </p>
         <div class="hero-cta-group">
-            <a href="#download" class="cta-btn">Download STL Kit</a>
+            <a href="#download" class="cta-btn">Download files</a>
             <a href="#breakdown" class="cta-btn secondary">Explore the System</a>
         </div>
 
         <div class="mock-3d-container">
             <img src="assets/GuitarImageTest1.png?v=3"
-                alt="Electric guitar equipped with the MF3D 3D-printed microtonal fretboard"
-                class="hero-guitar-img"
+                alt="Electric guitar equipped with the MF3D 3D-printed microtonal fretboard" class="hero-guitar-img"
                 referrerPolicy="no-referrer">
         </div>
     </section>
@@ -1612,8 +1789,8 @@
             <li>
                 <span class="icon">01</span>
                 <div><strong>Microtonal Made Easy</strong>Slide-in fretboard mechanism for quick scale
-                    explorations
-                    without removing strings.</div>
+                    exploration
+                    on your existing instrument.</div>
             </li>
             <li>
                 <span class="icon">02</span>
@@ -1622,15 +1799,15 @@
             </li>
             <li>
                 <span class="icon">03</span>
-                <div><strong>Low Cost</strong>Print it yourself DIY-style, or use third-party 3D printing
-                    services.</div>
+                <div><strong>Low Cost</strong>Print it yourself at home, or use a third-party 3D printing
+                    service.</div>
             </li>
         </ul>
     </section>
 
     <section id="breakdown">
         <div style="text-align: center; margin-bottom: 4rem;">
-            <h2>The Kit</h2>
+            <h2>The MF3D Kit</h2>
             <p class="lead" style="margin: 0 auto;">Discover how the
                 MF3D system seamlessly integrates with your instrument piece by piece.</p>
         </div>
@@ -1638,51 +1815,148 @@
         <div class="kit-grid">
             <div class="feature-card">
                 <div class="feature-media">
-                    <img src="assets/BasePiece.png" alt="3D render of the MF3D Base Piece with sliding dovetail slots" loading="lazy">
+                    <img src="assets/pieces/BasePiece.png"
+                        alt="3D render of the MF3D Base Piece with sliding dovetail slots" loading="lazy">
                 </div>
                 <div class="feature-content">
                     <span class="highlight">01. The Foundation</span>
                     <h3>The Base Piece</h3>
-                    <p style="color: var(--text-muted);">Attaches to the top of the neck and frets via double-sided tape.
-                        Features sliding slots for the fretboard.</p>
+                    <p style="color: var(--text-muted);">Attaches to the top of the neck and existing frets, providing
+                        sliding slots for the fretboard.</p>
                 </div>
             </div>
             <div class="feature-card">
                 <div class="feature-media">
-                    <img src="assets/Fretboard.png" alt="3D render of the interchangeable MF3D Microtonal Fretboard" loading="lazy">
+                    <img src="assets/pieces/Fretboard.png"
+                        alt="3D render of the interchangeable MF3D Microtonal Fretboard" loading="lazy">
                 </div>
                 <div class="feature-content">
                     <span class="highlight">02. The Heart</span>
                     <h3>The Fretboard</h3>
-                    <p style="color: var(--text-muted);">Slides smoothly into the base piece. Easily hot-swappable. Supports
-                        print-in-place frets, modular slide-ins, or standard wire frets.</p>
+                    <p style="color: var(--text-muted);">Slides into the base piece and is easily hot-swappable.
+                        Its slots let you install a full or partial set of frets to explore subgroup scales.
+                    </p>
                 </div>
             </div>
             <div class="feature-card">
                 <div class="feature-media">
-                    <img src="assets/OverNut.png" alt="3D render of the MF3D Overnut piece" loading="lazy">
+                    <img src="assets/pieces/Fret.png" alt="3D render of an MF3D Fret sliding into the fretboard slot"
+                        loading="lazy">
                 </div>
                 <div class="feature-content">
-                    <span class="highlight">03. The Elevation</span>
+                    <span class="highlight">03. The Intonation</span>
+                    <h3>The Frets</h3>
+                    <p style="color: var(--text-muted);">Slide into the fretboard for your chosen scale, and can be
+                        swapped individually when worn.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-media">
+                    <img src="assets/pieces/OverNut.png" alt="3D render of the MF3D Overnut piece" loading="lazy">
+                </div>
+                <div class="feature-content">
+                    <span class="highlight">04. The Elevation</span>
                     <h3>The Overnut</h3>
-                    <p style="color: var(--text-muted);">Goes over the current nut without unmounting it, elegantly
+                    <p style="color: var(--text-muted);">Fits over the existing nut without removing it,
                         elevating the strings to the new fretboard height.</p>
                 </div>
             </div>
             <div class="feature-card">
                 <div class="feature-media">
-                    <img src="assets/BridgeSupport.png" alt="3D render of the MF3D Bridge Stud elevation support" loading="lazy">
+                    <img src="assets/pieces/BridgeSupport.png" alt="3D render of the MF3D Bridge Stud elevation support"
+                        loading="lazy">
                 </div>
                 <div class="feature-content">
-                    <span class="highlight">04. The Compensation</span>
-                    <h3>Bridge Studs</h3>
-                    <p style="color: var(--text-muted);">Fit around current bridge screws to elevate the bridge, preserving
-                        intonation without replacing metal hardware.</p>
+                    <span class="highlight">05. The Compensation</span>
+                    <h3>The Bridge Studs</h3>
+                    <p style="color: var(--text-muted);">Fit around existing bridge screws to elevate the bridge
+                        without replacing metal hardware.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <section id="whos-using">
+        <div style="text-align: center; margin-bottom: 3.5rem;">
+            <h2>Who's Using MF3D</h2>
+            <p class="lead" style="margin: 0 auto;">
+                Early testers from the microtonal community printed MF3D for their instruments and shared hands-on
+                feedback to help refine the project.
+            </p>
+        </div>
+
+        <div class="users-grid">
+            <article class="user-card">
+                <div class="user-photo">
+                    <img src="assets/gallery/Daniel.png"
+                        alt="Daniel playing a classical guitar fitted with an MF3D microtonal fretboard"
+                        class="photo-daniel" loading="lazy">
+                </div>
+                <div class="user-body">
+                    <!-- <blockquote class="user-quote">
+                        “Testing the beta fretboard on my classical guitar made exploring microtonal voicings effortless—without touching the original neck.”
+                    </blockquote> -->
+                    <div class="user-meta">
+                        <div class="user-name-row">
+                            <h3>Daniel Giovanni</h3>
+                            <span class="user-instrument">Classical Guitar</span>
+                        </div>
+                        <span class="user-feedback-tag">Feedback: Modular fret layout &amp; neck comfort</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="user-card">
+                <div class="user-photo">
+                    <img src="assets/gallery/Stephen.jpg"
+                        alt="Stephen playing a black electric guitar with a yellow 3D-printed MF3D microtonal fretboard"
+                        class="photo-stephen" loading="lazy">
+                </div>
+                <div class="user-body">
+                    <!-- <blockquote class="user-quote">
+                        “Printing a microtonal fretboard for my electric guitar took a few hours instead of a custom luthier build—and it plays cleanly up the neck.”
+                    </blockquote> -->
+                    <div class="user-meta">
+                        <div class="user-name-row">
+                            <h3>Stephen Weigel</h3>
+                            <span class="user-instrument">Electric Guitar</span>
+                        </div>
+                        <span class="user-feedback-tag">Feedback: Electric neck tolerances &amp; action</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="user-card">
+                <div class="user-photo">
+                    <img src="assets/gallery/Praveen.png"
+                        alt="Praveen demonstrating his blue classical guitar with an MF3D microtonal fretboard"
+                        class="photo-praveen" loading="lazy">
+                </div>
+                <div class="user-body">
+                    <!-- <blockquote class="user-quote">
+                        “Installing the kit was completely reversible and surprisingly solid. Walking through the setup live helped dial in the string elevation.”
+                    </blockquote> -->
+                    <div class="user-meta">
+                        <div class="user-name-row">
+                            <h3>Praveen Vankataramana</h3>
+                            <span class="user-instrument">Classical Guitar</span>
+                        </div>
+                        <span class="user-feedback-tag">Feedback: Plastic fret sound &amp; installation flow</span>
+                    </div>
+                </div>
+            </article>
+
+
+        </div>
+
+        <p class="users-cta-note">
+            Testing MF3D on your instrument? <a
+                href="https://github.com/wilckerson/MF3D/issues/new?title=My%20MF3D%20build%20%26%20feedback%3A%20..."
+                target="_blank" rel="noopener noreferrer">Share
+                your build and
+                feedback</a> to be featured here.
+        </p>
+    </section>
 
     <section id="community" style="text-align: center; max-width: 800px;">
         <h2>Open Source & Community</h2>
@@ -1700,7 +1974,7 @@
             <h3 class="card-title-lg">Help support the project</h3>
             <p style="margin-bottom: 2rem; color: var(--text-muted);">Consider donating any
                 amount to support further development, new models, and additional scale systems.</p>
-            <a href="#" class="cta-btn">Donate via PayPal</a>
+            <a href="#" class="cta-btn">Donate to Support MF3D</a>
         </div>
     </section>
 
@@ -1708,18 +1982,18 @@
         <div>
             <h2>Free Download</h2>
             <p class="lead" style="margin-bottom: 2.5rem;">Select your instrument model and
-                tuning preference to get the customized STL files and installation instructions.</p>
+                tuning preference to get the customized STL files.</p>
 
             <div class="select-group">
                 <label for="model-select"
                     style="display: block; margin-bottom: 0.75rem; color: var(--text-main); font-weight: 600;">Instrument
                     Model</label>
                 <select id="model-select">
-                    <option>Guitar Fender Stratocaster (Modern C)</option>
-                    <option>Guitar Gibson Les Paul (Slim Taper)</option>
-                    <option>Guitar Ibanez RG (Wizard III)</option>
-                    <option>Bass Fender Jazz Bass (Modern C)</option>
-                    <option>Bass Yamaha TRBX (Slim C)</option>
+                    <option>Guitar — Fender Stratocaster (Modern C)</option>
+                    <option>Guitar — Gibson Les Paul (Slim Taper)</option>
+                    <option>Guitar — Ibanez RG (Wizard III)</option>
+                    <option>Bass — Fender Jazz Bass (Modern C)</option>
+                    <option>Bass — Yamaha TRBX (Slim C)</option>
                 </select>
             </div>
 
@@ -1728,15 +2002,20 @@
                     style="display: block; margin-bottom: 0.75rem; color: var(--text-main); font-weight: 600;">Scale
                     System</label>
                 <select id="scale-select">
-                    <option>19 EDO - Complete</option>
-                    <option>22 EDO - Complete</option>
-                    <option>31 EDO - Complete</option>
+                    <option>17 EDO</option>
+                    <option>19 EDO</option>
+                    <option>22 EDO</option>
+                    <option>31 EDO</option>
+                    <option>41 EDO (Kite guitar by skip-fretting)
+                    </option>
                 </select>
             </div>
 
-            <a href="#" class="cta-btn">Download .ZIP Package</a>
+            <a href="#" class="cta-btn">Download files</a>
+        </div>
 
-            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div class="print-settings-card">
+            <div>
                 <h4 style="margin-bottom: 1rem;">Recommended Print Settings</h4>
                 <div class="print-settings-grid">
                     <div>
@@ -1757,51 +2036,11 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="download-preview-box" aria-live="polite">
-            <div class="manifest-header">
-                <span>PACKAGE MANIFEST // STL BUNDLE</span>
-                <span class="manifest-status">READY TO SLICE</span>
-            </div>
-            <div class="manifest-body">
-                <div class="manifest-archive" id="manifest-zip">📦 mf3d_strat_modern_c_19edo.zip</div>
-                <ul class="manifest-tree">
-                    <li>
-                        <span>├── <span class="file-name" id="file-base">01_base_rail_strat_mc.stl</span></span>
-                        <span class="file-meta">1.4 MB</span>
-                    </li>
-                    <li>
-                        <span>├── <span class="file-name" id="file-fb">02_fretboard_19edo_complete.stl</span></span>
-                        <span class="file-meta">3.8 MB</span>
-                    </li>
-                    <li>
-                        <span>├── <span class="file-name" id="file-nut">03_overnut_42.0mm.stl</span></span>
-                        <span class="file-meta">0.4 MB</span>
-                    </li>
-                    <li>
-                        <span>├── <span class="file-name" id="file-studs">04_bridge_studs_pair.stl</span></span>
-                        <span class="file-meta">0.6 MB</span>
-                    </li>
-                    <li>
-                        <span>└── <span class="file-name">README_calibration_guide.pdf</span></span>
-                        <span class="file-meta">0.3 MB</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="manifest-specs">
-                <div>
-                    <span class="spec-label">Scale Length</span>
-                    <span class="spec-val" id="spec-scale-len">25.5" (647.7 mm)</span>
-                </div>
-                <div>
-                    <span class="spec-label">Step Interval</span>
-                    <span class="spec-val" id="spec-step-cents">63.16 cents</span>
-                </div>
-                <div>
-                    <span class="spec-label">Neck Profile</span>
-                    <span class="spec-val" id="spec-profile">9.5" Radius / Modern C</span>
-                </div>
+            <div class="print-settings-footer">
+                <p>More printing details and step-by-step instructions are available on the
+                    installation page.</p>
+                <a href="#" class="cta-btn secondary">Go to Installation Page</a>
             </div>
         </div>
         <div class="custom-model-card">
@@ -1815,7 +2054,47 @@
                     exactly why community support and
                     contributions are so vital
                     in helping us expand the library of options.</p>
-                <a href="mailto:mf3d@gmail.com" class="cta-btn secondary" style="margin: 0;">Request a Custom Model</a>
+                <div class="custom-model-actions">
+                    <a href="https://github.com/wilckerson/MF3D/issues/new?title=I%20would%20like%20a%20new%20model%20for..."
+                        target="_blank" rel="noopener noreferrer" class="cta-btn" style="margin: 0;">Request a Custom
+                        Model</a>
+                    <a href="#" class="cta-btn secondary">Donate to Support MF3D</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about-grid">
+            <figure class="about-photo-frame">
+                <img src="assets/Me_building.jpg"
+                    alt="Wilckerson at his workbench designing 3D-printed MF3D microtonal fretboards in CAD alongside prototypes and a classical guitar"
+                    loading="lazy">
+            </figure>
+
+            <div class="about-content">
+                <span class="about-eyebrow">The Creator</span>
+                <h2>About Me</h2>
+                <div class="about-text">
+                    <p>Hi, I'm <strong>Wilckerson Ganda</strong>, a Brazilian microtonal enthusiast currently
+                        living in Canada. Ever since the day I discovered the Indian sitar and the Turkish
+                        ba&#287;lama, with their non-Western fret placement, a new world of notes and curiosity opened
+                        up
+                        to me. Thanks to the microtonal community and the knowledge on <a href="https://en.xen.wiki/"
+                            target="_blank" rel="noopener noreferrer">Xen.wiki</a>, I was able to dive deep into it
+                        over the past few years.</p>
+                    <p>However, I have always felt that there should be an easy and affordable way to explore
+                        microtonality so more people can join in. That is why I spent countless hours prototyping and
+                        modifying instruments until I turned to 3D printing, which helped move the idea forward and
+                        resulted in the <strong>MF3D</strong> project.</p>
+                    <p> I invite you to join me on this journey to
+                        collaborate and make microtonal music accessible to more people.</p>
+                </div>
+                <div class="about-actions">
+                    <a href="https://github.com/wilckerson/MF3D/issues/new?title=Hello%20from%20..." target="_blank"
+                        rel="noopener noreferrer" class="cta-btn secondary">Say Hello
+                        &amp; Collaborate</a>
+                </div>
             </div>
         </div>
     </section>
@@ -1823,14 +2102,17 @@
     <footer>
         <a href="#" class="logo" style="justify-content: center; margin-bottom: 1.5rem;">
             <div class="logo-icon">
-                <svg width="28" height="24" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M2.5 6.5L25.5 3.5V20.5L2.5 17.5V6.5Z" fill="#151618" stroke="#98c1e5" stroke-width="1.5" stroke-linejoin="round"/>
-                    <path d="M5.5 6.2V17.8" stroke="#f4f3ef" stroke-width="1.75"/>
-                    <path d="M5.5 9L25.5 7.2M5.5 12H25.5M5.5 15L25.5 16.8" stroke="#f4f3ef" stroke-opacity="0.3" stroke-width="1"/>
-                    <path d="M10 5.6V13.5" stroke="#955251" stroke-width="1.75"/>
-                    <path d="M14 10.5V19" stroke="#d4a853" stroke-width="1.75"/>
-                    <path d="M18 4.5V12" stroke="#98c1e5" stroke-width="1.75"/>
-                    <path d="M21.5 12V20" stroke="#955251" stroke-width="1.75"/>
+                <svg width="28" height="24" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true">
+                    <path d="M2.5 6.5L25.5 3.5V20.5L2.5 17.5V6.5Z" fill="#151618" stroke="#98c1e5" stroke-width="1.5"
+                        stroke-linejoin="round" />
+                    <path d="M5.5 6.2V17.8" stroke="#f4f3ef" stroke-width="1.75" />
+                    <path d="M5.5 9L25.5 7.2M5.5 12H25.5M5.5 15L25.5 16.8" stroke="#f4f3ef" stroke-opacity="0.3"
+                        stroke-width="1" />
+                    <path d="M10 5.6V13.5" stroke="#955251" stroke-width="1.75" />
+                    <path d="M14 10.5V19" stroke="#d4a853" stroke-width="1.75" />
+                    <path d="M18 4.5V12" stroke="#98c1e5" stroke-width="1.75" />
+                    <path d="M21.5 12V20" stroke="#955251" stroke-width="1.75" />
                 </svg>
             </div>
             MF3D
@@ -1839,9 +2121,10 @@
                 href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC
                 BY-NC-SA 4.0</a>.</p>
         <div class="footer-links">
-            <a href="mailto:mf3d@gmail.com">Contact: mf3d@gmail.com</a>
+            <a href="https://github.com/wilckerson/MF3D/issues/new" target="_blank"
+                rel="noopener noreferrer">Contact</a>
             <span class="separator" style="color: rgba(255,255,255,0.2);">|</span>
-            <a href="#">GitHub Repository</a>
+            <a href="https://github.com/wilckerson/MF3D" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
 
         </div>
     </footer>
@@ -1883,43 +2166,6 @@
                     navToggle.setAttribute('aria-expanded', 'false');
                 }
             });
-        }
-
-        // Dynamic CAD Package Manifest update
-        const modelSelect = document.getElementById('model-select');
-        const scaleSelect = document.getElementById('scale-select');
-
-        const modelSpecs = {
-            0: { slug: 'strat_mc', nut: '42.0mm', scaleLen: '25.5" (647.7 mm)', profile: '9.5" Radius / Modern C' },
-            1: { slug: 'lespaul_st', nut: '43.0mm', scaleLen: '24.75" (628.6 mm)', profile: '12" Radius / Slim Taper' },
-            2: { slug: 'ibanez_rg_w3', nut: '43.0mm', scaleLen: '25.5" (647.7 mm)', profile: '15.75" Radius / Wizard III' },
-            3: { slug: 'jazzbass_mc', nut: '38.1mm', scaleLen: '34.0" (863.6 mm)', profile: '9.5" Radius / Modern C' },
-            4: { slug: 'yamaha_trbx', nut: '38.0mm', scaleLen: '34.0" (863.6 mm)', profile: '10" Radius / Slim C' }
-        };
-
-        const edoSpecs = {
-            0: { slug: '19edo', cents: '63.16 cents (19 EDO)' },
-            1: { slug: '22edo', cents: '54.55 cents (22 EDO)' },
-            2: { slug: '31edo', cents: '38.71 cents (31 EDO)' }
-        };
-
-        function updateManifest() {
-            if (!modelSelect || !scaleSelect) return;
-            const m = modelSpecs[modelSelect.selectedIndex] || modelSpecs[0];
-            const s = edoSpecs[scaleSelect.selectedIndex] || edoSpecs[0];
-
-            document.getElementById('manifest-zip').textContent = `📦 mf3d_${m.slug}_${s.slug}.zip`;
-            document.getElementById('file-base').textContent = `01_base_rail_${m.slug}.stl`;
-            document.getElementById('file-fb').textContent = `02_fretboard_${s.slug}_complete.stl`;
-            document.getElementById('file-nut').textContent = `03_overnut_${m.nut}.stl`;
-            document.getElementById('spec-scale-len').textContent = m.scaleLen;
-            document.getElementById('spec-step-cents').textContent = s.cents;
-            document.getElementById('spec-profile').textContent = m.profile;
-        }
-
-        if (modelSelect && scaleSelect) {
-            modelSelect.addEventListener('change', updateManifest);
-            scaleSelect.addEventListener('change', updateManifest);
         }
     </script>
 </body>
