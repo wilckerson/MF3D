@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Installation Instructions | MF3D</title>
+    <meta name="description"
+        content="Step-by-step printing and installation instructions for the MF3D 3D-printed microtonal fretboard kit. Currently under construction — coming soon.">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Installation Instructions | MF3D">
+    <meta property="og:description"
+        content="Step-by-step printing and installation guide for MF3D is currently being built. Coming soon.">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400..800;1,700..800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0c0c0d;
+            --bg-secondary: #151618;
+            --bg-surface: #1b1c1f;
+            --text-main: #f4f3ef;
+            --text-muted: #9ca0a6;
+            --accent-primary: #98c1e5;
+            --accent-primary-rgb: 152, 193, 229;
+            --accent-primary-hover: #78a1c5;
+            --accent-secondary: #955251;
+            --accent-secondary-rgb: 149, 82, 81;
+            --accent-secondary-text: #c98583;
+            --accent-brass: #d4a853;
+
+            --font-sans: 'Inter', system-ui, sans-serif;
+            --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+            --fs-display: clamp(2.15rem, 1.2rem + 3.8vw, 3.85rem);
+            --fs-h2: clamp(1.5rem, 1.1rem + 1.6vw, 2.15rem);
+            --fs-h3: clamp(1.1rem, 1rem + 0.4vw, 1.25rem);
+            --fs-lead: clamp(1.02rem, 0.96rem + 0.35vw, 1.2rem);
+            --fs-eyebrow: 0.75rem;
+
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-pill: 999px;
+            --border-subtle: rgba(244, 243, 239, 0.045);
+            --border-strong: rgba(244, 243, 239, 0.14);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        ::selection {
+            background-color: var(--accent-secondary);
+            color: #fff;
+        }
+
+        /* Utility Lines / Grid Background */
+        .utility-grid {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -2;
+            background-image:
+                linear-gradient(rgba(244, 243, 239, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(244, 243, 239, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Watermark Background */
+        .watermark-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .watermark-bg div {
+            position: absolute;
+            color: rgba(var(--accent-primary-rgb), 0.14);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: orbitalDrift 16s linear infinite;
+            will-change: transform;
+        }
+
+        .watermark-bg div svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .watermark-bg div:nth-child(1) {
+            width: 8rem;
+            height: 16rem;
+            top: 12%;
+            left: 6%;
+            --base-rot: 15deg;
+            animation-duration: 14.3s;
+            animation-delay: -2s;
+        }
+
+        .watermark-bg div:nth-child(2) {
+            width: 11rem;
+            height: 22rem;
+            top: 58%;
+            left: 84%;
+            --base-rot: -18deg;
+            color: rgba(var(--accent-secondary-rgb), 0.18);
+            animation-name: orbitalDriftReverse;
+            animation-duration: 19s;
+            animation-delay: -5s;
+        }
+
+        .watermark-bg div:nth-child(3) {
+            width: 6rem;
+            height: 12rem;
+            top: 74%;
+            left: 10%;
+            --base-rot: 5deg;
+            animation-duration: 12.1s;
+            animation-delay: -7s;
+        }
+
+        .watermark-bg div:nth-child(4) {
+            width: 7.5rem;
+            height: 15rem;
+            top: 18%;
+            left: 78%;
+            --base-rot: -10deg;
+            color: rgba(var(--accent-secondary-rgb), 0.16);
+            animation-name: orbitalDriftReverse;
+            animation-duration: 16s;
+            animation-delay: -3s;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 4rem;
+            background: rgba(12, 12, 13, 0.94);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-subtle);
+            transition: padding 0.3s ease;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.45rem;
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: -0.03em;
+            z-index: 102;
+        }
+
+        .logo-icon {
+            width: 28px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: var(--font-mono);
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-primary);
+        }
+
+        .nav-links a.nav-cta {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            padding: 0.55rem 1.15rem;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .nav-links a.nav-cta:hover {
+            background: var(--accent-primary-hover);
+            color: var(--bg-primary);
+            transform: translateY(-1px);
+        }
+
+        /* Mobile Hamburger Toggle */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 42px;
+            height: 42px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            padding: 0;
+            z-index: 102;
+            transition: background 0.2s, border-color 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .nav-toggle:hover {
+            border-color: var(--accent-primary);
+            background: rgba(var(--accent-primary-rgb), 0.1);
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--text-main);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .nav-toggle.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .nav-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8.5rem 2rem 5rem;
+            max-width: 960px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        main::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 30% 28%, rgba(var(--accent-primary-rgb), 0.08) 0%, transparent 48%),
+                radial-gradient(circle at 72% 65%, rgba(var(--accent-secondary-rgb), 0.08) 0%, transparent 48%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .status-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: clamp(2rem, 1.5rem + 3vw, 3.75rem);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), var(--accent-brass), var(--accent-secondary), transparent);
+            opacity: 0.85;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: var(--font-mono);
+            font-size: var(--fs-eyebrow);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-brass);
+            background: rgba(212, 168, 83, 0.08);
+            border: 1px solid rgba(212, 168, 83, 0.28);
+            border-radius: var(--radius-pill);
+            padding: 0.45rem 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-brass);
+            box-shadow: 0 0 10px rgba(212, 168, 83, 0.75);
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: var(--fs-display);
+            font-weight: 700;
+            line-height: 1.12;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.25rem;
+            text-wrap: balance;
+        }
+
+        .accent-italic {
+            color: var(--accent-secondary-text);
+            font-style: italic;
+        }
+
+        .lead {
+            font-size: var(--fs-lead);
+            color: var(--text-muted);
+            max-width: 58ch;
+            margin: 0 auto 2.25rem;
+            text-wrap: pretty;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--font-mono);
+            background-color: var(--accent-primary);
+            color: var(--bg-primary);
+            padding: 0.9rem 1.85rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--accent-primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .cta-btn.secondary {
+            background-color: rgba(12, 12, 13, 0.6);
+            color: var(--text-main);
+            border: 1px solid var(--border-strong);
+        }
+
+        .cta-btn.secondary:hover {
+            border-color: rgba(244, 243, 239, 0.34);
+            background-color: rgba(244, 243, 239, 0.12);
+        }
+
+        /* Upcoming Roadmap Preview */
+        .roadmap {
+            margin-top: 2.5rem;
+        }
+
+        .roadmap-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .roadmap-label {
+            font-family: var(--font-mono);
+            font-size: var(--fs-eyebrow);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-secondary-text);
+            font-weight: 600;
+        }
+
+        .roadmap-note {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .roadmap-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            text-align: left;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .roadmap-item:hover {
+            background: var(--bg-surface);
+            border-color: var(--border-strong);
+        }
+
+        .roadmap-step {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .roadmap-item h2 {
+            font-family: var(--font-display);
+            font-size: var(--fs-h3);
+            font-weight: 700;
+            margin-bottom: 0.45rem;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+        }
+
+        .roadmap-item p {
+            color: var(--text-muted);
+            font-size: 0.94rem;
+            line-height: 1.55;
+        }
+
+        .help-note {
+            margin-top: 2.25rem;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .help-note a {
+            color: var(--accent-primary);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .help-note a:hover {
+            color: var(--text-main);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3.5rem 2rem;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            margin-top: auto;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        footer a {
+            color: var(--accent-secondary-text);
+            text-decoration: none;
+            display: inline-block;
+            padding-block: 0.6rem;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent-primary);
+        }
+
+        footer p a {
+            color: var(--accent-secondary-text);
+            text-decoration: underline;
+            text-decoration-color: rgba(var(--accent-secondary-rgb), 0.5);
+            text-underline-offset: 3px;
+            display: inline;
+            padding: 0;
+        }
+
+        footer p a:hover {
+            color: var(--accent-primary);
+            text-decoration-color: var(--accent-primary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1.25rem;
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 3px;
+        }
+
+        @keyframes statusPulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.45;
+                transform: scale(0.85);
+            }
+        }
+
+        @keyframes orbitalDrift {
+            0% {
+                transform: translate3d(0px, -16px, 0) rotate(calc(var(--base-rot, 0deg) + 0deg));
+            }
+
+            25% {
+                transform: translate3d(16px, 0px, 0) rotate(calc(var(--base-rot, 0deg) + 5deg));
+            }
+
+            50% {
+                transform: translate3d(0px, 16px, 0) rotate(calc(var(--base-rot, 0deg) + 0deg));
+            }
+
+            75% {
+                transform: translate3d(-16px, 0px, 0) rotate(calc(var(--base-rot, 0deg) - 5deg));
+            }
+
+            100% {
+                transform: translate3d(0px, -16px, 0) rotate(calc(var(--base-rot, 0deg) + 0deg));
+            }
+        }
+
+        @keyframes orbitalDriftReverse {
+            0% {
+                transform: translate3d(0px, 16px, 0) rotate(calc(var(--base-rot, 0deg) + 0deg));
+            }
+
+            25% {
+                transform: translate3d(16px, 0px, 0) rotate(calc(var(--base-rot, 0deg) - 5deg));
+            }
+
+            50% {
+                transform: translate3d(0px, -16px, 0) rotate(calc(var(--base-rot, 0deg) + 0deg));
+            }
+
+            75% {
+                transform: translate3d(-16px, 0px, 0) rotate(calc(var(--base-rot, 0deg) + 5deg));
+            }
+
+            100% {
+                transform: translate3d(0px, 16px, 0) rotate(calc(var(--base-rot, 0deg) + 0deg));
+            }
+        }
+
+        @media (max-width: 900px) {
+            nav {
+                padding: 1rem 1.75rem;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 66px;
+                left: 0;
+                right: 0;
+                width: 100%;
+                max-height: calc(100vh - 66px);
+                max-height: calc(100dvh - 66px);
+                overflow-y: auto;
+                background: rgba(10, 10, 10, 0.96);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-bottom: 1px solid var(--border-subtle);
+                flex-direction: column;
+                padding: 1.75rem 1.5rem max(1.75rem, env(safe-area-inset-bottom));
+                gap: 1.25rem;
+                align-items: center;
+                transform: translateY(-130%);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+                z-index: 99;
+            }
+
+            .nav-links.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .nav-links a {
+                font-size: 1.15rem;
+                padding: 0.6rem 1rem;
+                width: 100%;
+                text-align: center;
+                border-radius: 8px;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .roadmap-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                padding: 0.85rem 1.25rem;
+            }
+
+            main {
+                padding: 6.5rem 1.25rem 3.5rem;
+            }
+
+            .actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .actions .cta-btn {
+                width: 100%;
+            }
+
+            footer {
+                padding: 3rem 1.25rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .footer-links .separator {
+                display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="watermark-bg" aria-hidden="true">
+        <div>
+            <svg viewBox="-10 0 309 1536" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor"
+                    d="m 229,381 h -32 l 7,315 c -18.667,-32.667 -49.667,-49 -93,-49 -14.667,0 -28.833,2.5 -42.5,7.5 -13.667,5 -25.5,11.833 -35.5,20.5 -10,8.667 -18,19 -24,31 -6,12 -9,25 -9,39 1.33301,19.333 8.5,40.5 21.5,63.5 13,23 35.167,46.167 66.5,69.5 l 141,104 z m -93,306 c 28,0 49.333,14 64,42 4,38 6,70.333 6,97 0,23.333 -0.5,43.333 -1.5,60 -1,16.667 -2.16699,29.667 -3.5,39 -12.667,-8 -26.167,-19.833 -40.5,-35.5 C 146.167,873.833 133,857 121,839 109,821 99.167,803.167 91.5,785.5 83.833,767.833 80,753 80,741 80,725.667 85.5,712.833 96.5,702.5 107.5,692.167 120.667,687 136,687 Z" />
+            </svg>
+        </div>
+        <div>
+            <svg viewBox="-10 0 579 1536" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor"
+                    d="m 229,381 h -32 l 7,315 c -18.667,-32.667 -49.667,-49 -93,-49 -14.667,0 -28.833,2.5 -42.5,7.5 -13.667,5 -25.5,11.833 -35.5,20.5 -10,8.667 -18,19 -24,31 -6,12 -9,25 -9,39 1.33301,19.333 8.5,40.5 21.5,63.5 13,23 35.167,46.167 66.5,69.5 l 141,104 z m -93,306 c 28,0 49.333,14 64,42 4,38 6,70.333 6,97 0,23.333 -0.5,43.333 -1.5,60 -1,16.667 -2.16699,29.667 -3.5,39 -12.667,-8 -26.167,-19.833 -40.5,-35.5 C 146.167,873.833 133,857 121,839 109,821 99.167,803.167 91.5,785.5 83.833,767.833 80,753 80,741 80,725.667 85.5,712.833 96.5,702.5 107.5,692.167 120.667,687 136,687 Z" />
+                <path fill="currentColor"
+                    d="m 259.91668,381.04166 h 32 l -7,315 c 18.667,-32.667 49.667,-49 93,-49 14.667,0 28.833,2.5 42.5,7.5 13.667,5 25.5,11.833 35.5,20.5 10,8.667 18,19 24,31 6,12 9,25 9,39 -1.33301,19.333 -8.5,40.5 -21.5,63.5 -13,23 -35.167,46.167 -66.5,69.5 l -141,104 z m 93,306 c -28,0 -49.333,14 -64,42 -4,38 -6,70.333 -6,97 0,23.333 0.5,43.333 1.5,60 1,16.667 2.16699,29.667 3.5,39 12.667,-8 26.167,-19.833 40.5,-35.5 14.333,-15.667 27.5,-32.5 39.5,-50.5 12,-18 21.833,-35.833 29.5,-53.5 7.667,-17.667 11.5,-32.5 11.5,-44.5 0,-15.333 -5.5,-28.167 -16.5,-38.5 -11,-10.333 -24.167,-15.5 -39.5,-15.5 z" />
+            </svg>
+        </div>
+        <div>
+            <svg viewBox="-20 0 296 1566" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor"
+                    d="M 105 449 L 105 606 L 10 654 L 10 762 L 105 714 L 105 886 L 10 934 L 10 1042 L 105 994 L 105 1151 L 130 1151 L 130 982 L 226 934 L 226 827 L 130 874 L 130 702 L 226 654 L 226 547 L 130 594 L 130 449 L 105 449 z"
+                    transform="translate(-10)" />
+            </svg>
+        </div>
+        <div>
+            <svg viewBox="-20 0 451 1536" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor"
+                    d="M 294.00021,453 V 589 L 198.0002,621 V 478 h -25 V 628 L 77.00002,660 V 510 h -25 V 667 L 0,684 v 91 L 52.00002,758 V 929 L 0,947 v 90 l 52.00002,-16 v 126 h 25 v -134 l 96.00018,-31 v 142 h 25 V 974 l 96.00001,-31 v 150 h 25 V 935 l 52,-16 v -92 l -52,18 V 673 l 52,-17 v -91 l -52,17 V 453 Z m 0,227 V 851 L 198.0002,884 V 712 Z M 173.0002,719 V 890 L 77.00002,923 V 751 Z" />
+            </svg>
+        </div>
+    </div>
+    <div class="utility-grid"></div>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <div class="logo-icon">
+                <svg width="28" height="24" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true">
+                    <path d="M2.5 6.5L25.5 3.5V20.5L2.5 17.5V6.5Z" fill="#151618" stroke="#98c1e5" stroke-width="1.5"
+                        stroke-linejoin="round" />
+                    <path d="M5.5 6.2V17.8" stroke="#f4f3ef" stroke-width="1.75" />
+                    <path d="M5.5 9L25.5 7.2M5.5 12H25.5M5.5 15L25.5 16.8" stroke="#f4f3ef" stroke-opacity="0.3"
+                        stroke-width="1" />
+                    <path d="M10 5.6V13.5" stroke="#955251" stroke-width="1.75" />
+                    <path d="M14 10.5V19" stroke="#d4a853" stroke-width="1.75" />
+                    <path d="M18 4.5V12" stroke="#98c1e5" stroke-width="1.75" />
+                    <path d="M21.5 12V20" stroke="#955251" stroke-width="1.75" />
+                </svg>
+            </div>
+            MF3D
+        </a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="nav-links" id="nav-links">
+            <a href="index.html#philosophy">The Vision</a>
+            <a href="index.html#breakdown">The Kit</a>
+            <a href="index.html#whos-using">Who's Using MF3D</a>
+            <a href="index.html#community">Community</a>
+            <a href="index.html#about">About Me</a>
+            <a href="index.html#download" class="nav-cta">Download</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="status-card" aria-labelledby="installation-heading">
+            <div class="status-badge">
+                <span class="status-dot" aria-hidden="true"></span>
+                Building &middot; Coming Soon
+            </div>
+
+            <h1 id="installation-heading">Installation Instructions <span class="accent-italic">are in progress</span>
+            </h1>
+
+            <p class="lead">
+                We're currently building the complete printing and installation guide for MF3D — with clear photos,
+                slicer tips, and step-by-step setup instructions. Check back soon!
+            </p>
+
+            <div class="actions">
+                <a href="index.html" class="cta-btn">Back to Home</a>
+                <a href="index.html#download" class="cta-btn secondary">Go to Downloads</a>
+            </div>
+        </section>
+
+        <section class="roadmap" aria-label="What is coming in the guide">
+            <div class="roadmap-header">
+                <span class="roadmap-label">What's Coming in This Guide</span>
+                <span class="roadmap-note">Status: In Development</span>
+            </div>
+
+            <div class="roadmap-grid">
+                <article class="roadmap-item">
+                    <span class="roadmap-step">01 &middot; Slicing &amp; Printing</span>
+                    <h2>Print Orientation &amp; Tolerances</h2>
+                    <p>Recommended slicer profiles, part orientations, support placement, and fit checks for the sliding
+                        dovetail slots.</p>
+                </article>
+
+                <article class="roadmap-item">
+                    <span class="roadmap-step">02 &middot; Neck Prep</span>
+                    <h2>Base Piece Mounting</h2>
+                    <p>How to clean the fretboard, position the double-sided tape, and seat the Base Piece with zero
+                        permanent modifications.</p>
+                </article>
+
+                <article class="roadmap-item">
+                    <span class="roadmap-step">03 &middot; Scale Setup</span>
+                    <h2>Fretboard &amp; Fret Assembly</h2>
+                    <p>Sliding in individual frets for full or subgroup microtonal scales and swapping fretboards
+                        between
+                        tunings.</p>
+                </article>
+
+                <article class="roadmap-item">
+                    <span class="roadmap-step">04 &middot; Action &amp; Intonation</span>
+                    <h2>Overnut &amp; Bridge Elevation</h2>
+                    <p>Installing the Overnut and Bridge Studs to match the elevated fretboard height while keeping your
+                        existing setup intact.</p>
+                </article>
+            </div>
+
+            <p class="help-note">
+                Already printed a kit and need installation help right now?
+                <a href="https://github.com/wilckerson/MF3D/issues/new?title=Installation%20question%3A%20..."
+                    target="_blank" rel="noopener noreferrer">Ask on GitHub Issues</a>.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <a href="index.html" class="logo" style="justify-content: center; margin-bottom: 1.5rem;">
+            <div class="logo-icon">
+                <svg width="28" height="24" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true">
+                    <path d="M2.5 6.5L25.5 3.5V20.5L2.5 17.5V6.5Z" fill="#151618" stroke="#98c1e5" stroke-width="1.5"
+                        stroke-linejoin="round" />
+                    <path d="M5.5 6.2V17.8" stroke="#f4f3ef" stroke-width="1.75" />
+                    <path d="M5.5 9L25.5 7.2M5.5 12H25.5M5.5 15L25.5 16.8" stroke="#f4f3ef" stroke-opacity="0.3"
+                        stroke-width="1" />
+                    <path d="M10 5.6V13.5" stroke="#955251" stroke-width="1.75" />
+                    <path d="M14 10.5V19" stroke="#d4a853" stroke-width="1.75" />
+                    <path d="M18 4.5V12" stroke="#98c1e5" stroke-width="1.75" />
+                    <path d="M21.5 12V20" stroke="#955251" stroke-width="1.75" />
+                </svg>
+            </div>
+            MF3D
+        </a>
+        <p style="font-size: 0.95rem;">Built with passion by Wilckerson. Licensed under <a
+                href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC
+                BY-NC-SA 4.0</a>.</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <span class="separator" style="color: rgba(255,255,255,0.2);">|</span>
+            <a href="https://github.com/wilckerson/MF3D/issues/new" target="_blank"
+                rel="noopener noreferrer">Contact</a>
+            <span class="separator" style="color: rgba(255,255,255,0.2);">|</span>
+            <a href="https://github.com/wilckerson/MF3D" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+        </div>
+    </footer>
+
+    <script>
+        const navToggle = document.getElementById('nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('click', () => {
+                const isOpen = navToggle.classList.toggle('open');
+                navLinks.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', isOpen);
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navToggle.classList.remove('open');
+                    navLinks.classList.remove('open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!navToggle.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('open')) {
+                    navToggle.classList.remove('open');
+                    navLinks.classList.remove('open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+                    navToggle.classList.remove('open');
+                    navLinks.classList.remove('open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

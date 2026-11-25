@@ -15,6 +15,10 @@ app.get('/', (_req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.get('/installation', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'installation.html'));
+});
+
 app.listen(PORT, HOST, () => {
   console.log(`MF3D static server listening on http://${HOST}:${PORT}`);
 });
